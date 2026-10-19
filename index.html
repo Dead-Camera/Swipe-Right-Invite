@@ -382,35 +382,48 @@ a.btn{display:block;text-align:center;text-decoration:none}
   *{transition-duration:.001ms !important;animation-duration:.001ms !important;animation-iteration-count:1 !important;animation-delay:0s !important}
   .burst{display:none}
 }
+
+/* ---------- language switch ---------- */
+.lang{position:absolute;top:18px;right:16px;z-index:40;display:flex;padding:3px;border:0;border-radius:999px;cursor:pointer;
+  background:rgba(10,12,20,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 0 0 1px rgba(255,255,255,.1) inset}
+.lang span{font-family:"Poppins",sans-serif;font-weight:700;font-size:11.5px;letter-spacing:.06em;color:rgba(255,255,255,.6);padding:5px 9px;border-radius:999px;transition:background var(--d-fast),color var(--d-fast)}
+.lang span.on{background:#fff;color:#161925}
+.minitag{display:inline-flex;align-items:center;gap:6px;margin-bottom:10px;font-family:"Poppins",sans-serif;font-weight:700;font-size:11.5px;letter-spacing:.04em;
+  background:rgba(63,196,99,.92);color:#fff;padding:6px 11px;border-radius:999px}
+.finalline{font-family:"Poppins",sans-serif;font-weight:800;font-style:italic;font-size:19px;margin-top:20px;
+  background:var(--flame);-webkit-background-clip:text;background-clip:text;color:transparent}
+#splash .foot .digital{margin-top:10px;font-size:11.5px;color:var(--dim);letter-spacing:.04em}
 </style>
 </head>
 <body>
 <div class="phone">
 
-  <!-- ============ SPLASH ============ -->
+  <button class="lang" id="lang" aria-label="Language / Idioma"><span data-l="en">EN</span><span data-l="es">ES</span></button>
+
+  <!-- ============ 1. WELCOME ============ -->
   <section class="screen active" id="splash">
     <div class="apphead"><div class="logo"><img class="logoimg" src="logo.png" alt="binder"></div></div>
     <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center">
-      <h1>You matched with the<br><span style="background:var(--flame);-webkit-background-clip:text;background-clip:text;color:transparent">SWIPE RIGHT</span> premiere</h1>
-      <p>One night. One giant screen. All of season 1. Create your profile and swipe to accept your invitation.</p>
+      <h1><span style="background:var(--flame);-webkit-background-clip:text;background-clip:text;color:transparent">SWIPE RIGHT:</span> <span data-t="w_title"></span></h1>
+      <p data-t="w_sub"></p>
       <div class="teaser" id="teaser"></div>
     </div>
-    <div class="foot" style="padding:0 30px 34px">
-      <button class="btn" id="go-create">Create my profile</button>
-      <div class="studio" style="margin-top:22px"><span class="lbl">An original series from</span><img src="deadcamera.png" alt="Dead Camera Studios"></div>
+    <div class="foot" style="padding:0 30px 30px">
+      <button class="btn" id="go-create" data-t="w_btn"></button>
+      <div class="studio" style="margin-top:22px"><span class="lbl" data-t="studio"></span><img src="deadcamera.png" alt="Dead Camera Studios"></div>
     </div>
   </section>
 
-  <!-- ============ CREATE PROFILE ============ -->
+  <!-- ============ 2. PROFILE ============ -->
   <section class="screen" id="create">
     <div class="apphead"><button class="back" data-back="splash" aria-label="Back">‹</button>
       <div class="logo"><img class="logoimg" src="logo.png" alt="binder"></div>
     </div>
     <div class="body">
       <div>
-        <div class="eyebrow">Step 1 of 2</div>
-        <h2>Create your profile</h2>
-        <p class="sub">So we can recognize you at the door and send you your digital ticket.</p>
+        <div class="eyebrow" data-t="p_step"></div>
+        <h2 data-t="p_title"></h2>
+        <p class="sub" data-t="p_sub"></p>
       </div>
 
       <div class="avatar-pick">
@@ -422,24 +435,28 @@ a.btn{display:block;text-align:center;text-decoration:none}
           </span>
         </label>
         <input type="file" id="photo-input" accept="image/*" hidden>
-        <span class="hint">Tap to add a photo (optional)</span>
+        <span class="hint" data-t="p_photo"></span>
       </div>
 
       <div class="field">
-        <label class="lab" for="name-input">Your name</label>
-        <input id="name-input" type="text" placeholder="First and last name" autocomplete="name" maxlength="40">
+        <label class="lab" for="name-input" data-t="p_name"></label>
+        <input id="name-input" type="text" data-tp="p_name_ph" autocomplete="name" maxlength="40">
       </div>
       <div class="field">
-        <label class="lab" for="email-input">Your email</label>
+        <label class="lab" for="email-input" data-t="p_email"></label>
         <input id="email-input" type="email" placeholder="you@email.com" autocomplete="email" maxlength="80">
+      </div>
+      <div class="field">
+        <label class="lab" for="phone-input" data-t="p_phone"></label>
+        <input id="phone-input" type="tel" placeholder="+57 300 123 4567" autocomplete="tel" inputmode="tel" maxlength="20">
       </div>
     </div>
     <div class="foot">
-      <button class="btn" id="go-discover" disabled>Enter binder</button>
+      <button class="btn" id="go-discover" disabled data-t="p_btn"></button>
     </div>
   </section>
 
-  <!-- ============ DISCOVER / SWIPE ============ -->
+  <!-- ============ 3. SWIPE RIGHT CARD ============ -->
   <section class="screen" id="discover">
     <div class="apphead">
       <div class="logo"><img class="logoimg" src="logo.png" alt="binder"></div>
@@ -449,9 +466,9 @@ a.btn{display:block;text-align:center;text-decoration:none}
     <div class="deck" id="deck">
       <div class="empty" id="deck-empty">
         <div class="big">🎬</div>
-        <h3>That's everyone for tonight</h3>
-        <p>You already matched with SWIPE RIGHT.</p>
-        <button class="btn" data-goto="details">See the premiere details</button>
+        <h3 data-t="e_title"></h3>
+        <p data-t="e_sub"></p>
+        <button class="btn" data-goto="details" data-t="see_plan"></button>
       </div>
       <div class="card reset" id="card">
         <div class="bars-top" id="bars-top"></div>
@@ -461,9 +478,10 @@ a.btn{display:block;text-align:center;text-decoration:none}
         <div class="tapzone l" data-tap="-1"></div>
         <div class="tapzone r" data-tap="1"></div>
         <div class="info">
-          <div class="nm"><span id="sr-name">Swipe Right</span><span class="verified" title="Verified">✓</span><span class="chip" id="sr-chip">S1</span></div>
-          <div class="loc"><span>📍</span><span id="sr-loc">In theaters · One night only</span></div>
-          <div class="bio" id="sr-bio"></div>
+          <div class="minitag" data-t="c_mini"></div>
+          <div class="nm"><span>Swipe Right</span><span class="verified">✓</span><span class="chip" data-t="c_chip"></span></div>
+          <div class="loc"><span>📍</span><span data-t="c_loc"></span></div>
+          <div class="bio" data-t="c_bio"></div>
           <div class="pills" id="sr-pills"></div>
         </div>
       </div>
@@ -490,47 +508,47 @@ a.btn{display:block;text-align:center;text-decoration:none}
     <div class="pane" id="pane-profile"></div>
 
     <nav class="nav">
-      <a href="#" class="on" data-tab="discover"><span class="ic">🧭</span>Discover</a>
-      <a href="#" data-tab="matches"><span class="ic">♥</span>Matches</a>
-      <a href="#" data-tab="messages"><span class="ic">💬</span>Messages<span class="dot" id="msg-dot"></span></a>
-      <a href="#" data-tab="profile"><span class="ic">👤</span>Profile</a>
+      <a href="#" class="on" data-tab="discover"><span class="ic">🧭</span><span data-t="n_discover"></span></a>
+      <a href="#" data-tab="matches"><span class="ic">♥</span><span data-t="n_matches"></span></a>
+      <a href="#" data-tab="messages"><span class="ic">💬</span><span data-t="n_messages"></span><span class="dot" id="msg-dot"></span></a>
+      <a href="#" data-tab="profile"><span class="ic">👤</span><span data-t="n_profile"></span></a>
     </nav>
 
     <div class="toast" id="toast"></div>
   </section>
 
-  <!-- ============ MATCH ============ -->
+  <!-- ============ 4. MATCH ============ -->
   <section class="screen" id="match">
     <div class="burst" id="burst"></div>
     <div class="mwrap">
-      <div class="mtitle"><span class="its">IT'S A</span><span class="script">Match!</span></div>
+      <div class="mtitle"><span class="its" data-t="m_its"></span><span class="script" data-t="m_match"></span></div>
       <div class="match-avatars">
         <span class="a you" id="match-you">👤</span>
         <img class="heart" src="icon.png" alt="">
         <span class="a sr" id="match-sr"><img class="srl" src="sr-logo.png" alt="SWIPE RIGHT"></span>
       </div>
-      <p class="msub"><b>SWIPE RIGHT</b> likes you too, <span class="ph-name" id="match-name">superstar</span>.</p>
+      <p class="msub" data-t="m_sub"></p>
     </div>
     <div class="foot">
-      <button class="btn" id="go-details">See the premiere details</button>
+      <button class="btn" id="go-details" data-t="see_plan"></button>
     </div>
   </section>
 
-  <!-- ============ DETAILS ============ -->
+  <!-- ============ 5. CONFIRMATION ============ -->
   <section class="screen" id="details">
     <div class="apphead"><button class="back" data-back="discover" aria-label="Back">‹</button>
       <div class="logo"><img class="logoimg" src="logo.png" alt="binder"></div>
     </div>
     <div class="scroll">
       <div>
-        <div class="eyebrow">You're invited · Step 2 of 2</div>
-        <h2>The SWIPE RIGHT premiere</h2>
-        <p class="lead">A big-screen showing of all of season 1. Bring your best first-date face.</p>
+        <div class="eyebrow" data-t="d_step"></div>
+        <h2 data-t="d_title"></h2>
+        <p class="lead" data-t="d_sub"></p>
       </div>
 
       <div class="ticket">
         <div class="top">
-          <div><div class="t">SWIPE RIGHT</div><div class="s">PREMIERE · IN THEATERS</div></div>
+          <div><div class="t">SWIPE RIGHT</div><div class="s" data-t="d_tag"></div></div>
           <div class="seal">🎬</div>
         </div>
         <div class="rows" id="detail-rows"></div>
@@ -538,31 +556,31 @@ a.btn{display:block;text-align:center;text-decoration:none}
 
     </div>
     <div class="foot">
-      <button class="btn" id="go-confirm">See my ticket</button>
-      <div class="finep">Your swipe right already confirmed your spot. There's nothing else to fill out.</div>
+      <button class="btn" id="go-confirm" data-t="d_btn"></button>
     </div>
   </section>
 
-  <!-- ============ DONE ============ -->
+  <!-- ============ 6. TICKET ============ -->
   <section class="screen" id="done">
     <div class="scroll">
       <div class="seal">🎬</div>
-      <h2 id="done-title">You're on the list!</h2>
-      <p class="sub" id="done-sub">Your spot is saved. Take a screenshot of this ticket and show it at the door.</p>
+      <h2 id="done-title"></h2>
+      <p class="sub" id="done-sub"></p>
 
       <div class="passcard">
         <div class="who">
           <span class="av" id="done-av"><span class="ph" style="font-size:22px;opacity:.5">👤</span></span>
           <div>
-            <div class="nm" id="done-name">Guest</div>
-            <div class="st" id="done-status">● Confirmed for SWIPE RIGHT</div>
+            <div class="nm" id="done-name"></div>
+            <div class="st" id="done-status"></div>
           </div>
         </div>
         <div class="detail" id="done-detail"></div>
       </div>
-      <button class="copybtn" id="copy-btn">📋 Copy my details</button>
+      <div class="finalline" data-t="t_final"></div>
+      <button class="copybtn" id="copy-btn"></button>
       <img class="slogan" src="slogan.png" alt="Lights, camera, vision, action.">
-      <div class="studio" style="margin-top:18px"><span class="lbl">An original series from</span><img src="deadcamera.png" alt="Dead Camera Studios"></div>
+      <div class="studio" style="margin-top:18px"><span class="lbl" data-t="studio"></span><img src="deadcamera.png" alt="Dead Camera Studios"></div>
     </div>
     <div class="foot">
       <div class="btn-row" id="done-cta"></div>
@@ -570,93 +588,237 @@ a.btn{display:block;text-align:center;text-decoration:none}
   </section>
 
 </div>
-
 <script>
 (function(){
   "use strict";
 
   /* ============================================================
-     CONFIG — edita todo aquí. Lo que diga "" o [...] es placeholder.
+     CONFIG — formulario de Google y fotos del perfil
      ============================================================ */
   var CONFIG = {
-    // Datos del evento (reemplaza los placeholders):
-    event: {
-      // Lo general: se ve ANTES del swipe para que la gente sepa si puede ir.
-      teaserDate:  "Saturday, December 5 · 4:30 PM",
-      teaserPlace: "Cinemark · CC El Tesoro, Medellín",
-      // Lo completo: se ve DESPUÉS del swipe right.
-      date:    "Saturday, December 5, 2026",
-      time:    "4:30 PM",
-      venue:   "Cinemark · CC El Tesoro",
-      hall:    "Theater 9",
-      address: "Carrera 25A # 1A Sur – 45",
-      city:    "Medellín, Colombia",
-      dress:   ""    // ej: "Comfy but with attitude" (opcional)
-    },
-    // Formulario de Google: al hacer swipe right los datos se envían SOLOS en segundo plano
-    // (el invitado nunca ve el formulario). Las respuestas caen en la hoja de cálculo del form.
+    // Al hacer swipe right los datos se envían SOLOS en segundo plano a este formulario.
     form: {
       base: "https://docs.google.com/forms/d/e/1FAIpQLScD-Q2oK7vBuIr0aaSjr56R0olextiFyShhoPU_O8m7mWYXQA/viewform",
       nameEntry:  "entry.1537169254",  // pregunta "Name"
-      emailEntry: "entry.886656657"    // pregunta "Email"
+      emailEntry: "entry.886656657",   // pregunta "Email"
+      phoneEntry: ""                   // pregunta "Phone" (pendiente: falta el código entry.XXXX)
     },
-    // Link "Agregar al calendario" (Google Calendar template). Opcional.
-    calendarUrl: "",
-    // Perfil de la serie que se ve en binder:
-    profile: {
-      name: "Swipe Right",
-      chip: "S1",
-      location: "Dec 5 · CC El Tesoro, Medellín",
-      bio: "Crime, toxic love and a getaway from Ohio to Tokyo to Colombia. All of season 1 on the big screen, for one night only. Swipe right if you dare to join us.",
-      interests: ["Premiere", "Giant screen", "Crime & romance", "100% AI"],
-      // Slots de key art (placeholder). Reemplaza cada uno por una imagen cuando quieras.
-      photos: [
-        { label: "Key art 01", grad: "linear-gradient(145deg,#ff5864,#fd267a)" },
-        { label: "Key art 02", grad: "linear-gradient(145deg,#ff9a3d,#ff5864)" },
-        { label: "Key art 03", grad: "linear-gradient(160deg,#7b2ff7,#fd267a)" },
-        { label: "Key art 04", grad: "linear-gradient(150deg,#141925,#ff5864)" }
-      ]
+    calendarUrl: "",  // link "Agregar al calendario" (opcional)
+    // Key art del perfil. Para usar una imagen: { img: "archivo.jpg" }
+    photos: [
+      { grad: "linear-gradient(145deg,#ff5864,#fd267a)" },
+      { grad: "linear-gradient(145deg,#ff9a3d,#ff5864)" },
+      { grad: "linear-gradient(160deg,#7b2ff7,#fd267a)" },
+      { grad: "linear-gradient(150deg,#141925,#ff5864)" }
+    ]
+  };
+
+  /* ============================================================
+     TEXTOS — inglés (en) y español (es)
+     ============================================================ */
+  var L = {
+    en: {
+      // 1. Welcome
+      w_title: "a match worth seeing in person.",
+      w_sub: "The first-ever vertical series screened in a movie theater.",
+      w_btn: "Create my profile",
+      teaserDate: "Saturday, December 5 · 4:30 PM",
+      teaserPlace: "Cinemark · El Tesoro Mall, Medellín",
+      studio: "An original series from",
+      // 2. Profile
+      p_step: "Step 1 of 2",
+      p_title: "Create your profile",
+      p_sub: "So we can recognize you at the door and send you your ticket.",
+      p_photo: "Tap to add a photo (optional)",
+      p_name: "Your name", p_name_ph: "First and last name",
+      p_email: "Your email",
+      p_phone: "Phone number",
+      p_btn: "Enter binder",
+      // 3. Card
+      c_chip: "S1",
+      c_loc: "Medellín. One night only",
+      c_bio: "The first-ever romantic thriller micro-drama.",
+      c_tags: ["Premiere", "Vertical format", "Big screen", "Dead Camera Studios"],
+      c_mini: "💚 Swipe right to accept",
+      nudges: ["Nobody says no to SWIPE RIGHT 😏", "Are you sure? The big screen is waiting…", "Nobody swipes nope on a premiere. Swipe right →"],
+      superlike: "💫 Super like — we can't wait to see you!",
+      e_title: "That's everyone for tonight",
+      e_sub: "You already matched with SWIPE RIGHT.",
+      // nav + tabs
+      n_discover: "Discover", n_matches: "Matches", n_messages: "Messages", n_profile: "Profile",
+      mt_title: "Matches", mt_sub: "Your only match tonight — and the best one.", mt_tap: "Tap to see the plan →",
+      mt_none: "No matches yet", mt_none_sub: "Swipe right on SWIPE RIGHT and see what happens 😉", mt_back: "Back to Discover",
+      ms_online: "● Online",
+      ms_hey: function(n){ return "Hey " + n + " 😏"; },
+      ms_ask: "Are you free on Saturday, December 5 at 4:30 PM? I'll be on the big screen at Cinemark, El Tesoro Mall.",
+      ms_pre: "Swipe right if you want to come with me 🎬", ms_reply: "Reply with a swipe right 💚",
+      ms_post: "It's a date. Here's everything you need 🎬",
+      pr_ok: "● Confirmed for the premiere", pr_pending: "● Pending: swipe right to confirm",
+      pr_ticket: "See my ticket", pr_edit: "Edit profile",
+      // 4. Match
+      m_its: "IT'S A", m_match: "Match!",
+      m_sub: "See you at the premiere.",
+      see_plan: "See the plan",
+      // 5. Confirmation
+      d_step: "Step 2 of 2",
+      d_title: "It's official: you've got a date.",
+      d_sub: "Be on time and dress like it's a first date.",
+      d_tag: "PREMIERE · IN THEATERS",
+      rows: [["📅","Date","Saturday, December 5"],["🕗","Time","4:30 PM"],["🎟️","Venue","Cinemark · El Tesoro Mall · Theater 9"],
+             ["📍","Address","Carrera 25A # 1A Sur – 45"],["🌆","City","Medellín"]],
+      d_btn: "Continue to your ticket",
+      // 6. Ticket
+      t_title: "You're on the list!",
+      t_sub: "Your spot is saved. Take a screenshot of this ticket and show it at the door.",
+      t_ok: "● Confirmed for SWIPE RIGHT",
+      t_event: "Event", t_event_v: "SWIPE RIGHT Premiere",
+      t_when: "When", t_when_v: "Saturday, December 5 · 4:30 PM",
+      t_where: "Where", t_where_v: "Cinemark · El Tesoro Mall · Theater 9 · Carrera 25A # 1A Sur – 45, Medellín",
+      t_name: "Name",
+      t_final: "Don't stand us up.",
+      t_copy: "📋 Copy my details", t_copied: "✅ Copied", t_done: "Done",
+      t_bye: "See you at the premiere! 🎬",
+      t_copytxt: "I'm confirming my attendance at the SWIPE RIGHT premiere.",
+      t_phone: "Phone",
+      t_cal: "📆 Add to calendar",
+      // fallback if the background send fails
+      f_title: "Almost there!",
+      f_sub: "We couldn't save your spot automatically. Open your <b>pre-filled</b> form and tap <b>Submit</b>.",
+      f_status: "● One more step: tap Submit on the form",
+      f_btn: "Open my form (pre-filled)",
+      copy_manual: "Copy manually: "
+    },
+    es: {
+      w_title: "un match que vale la pena ver en persona.",
+      w_sub: "La primera serie vertical proyectada en una sala de cine.",
+      w_btn: "Crear mi perfil",
+      teaserDate: "Sábado 5 de diciembre · 4:30 p. m.",
+      teaserPlace: "Cinemark · CC El Tesoro, Medellín",
+      studio: "Una serie original de",
+      p_step: "Paso 1 de 2",
+      p_title: "Crea tu perfil",
+      p_sub: "Para reconocerte en la entrada y enviarte tu ticket.",
+      p_photo: "Toca para agregar una foto (opcional)",
+      p_name: "Tu nombre", p_name_ph: "Nombre y apellido",
+      p_email: "Tu correo",
+      p_phone: "Celular",
+      p_btn: "Entrar a binder",
+      c_chip: "T1",
+      c_loc: "Medellín. Solo por una noche",
+      c_bio: "El primer thriller romántico en formato micro-drama.",
+      c_tags: ["Estreno", "Formato vertical", "Pantalla grande", "Dead Camera Studios"],
+      c_mini: "💚 Desliza para aceptar",
+      nudges: ["A SWIPE RIGHT no se le dice que no 😏", "¿Seguro? La pantalla grande te espera…", "Nadie le da nope a un estreno. Desliza a la derecha →"],
+      superlike: "💫 Super like — ¡te esperamos!",
+      e_title: "No hay nadie más por esta noche",
+      e_sub: "Ya hiciste match con SWIPE RIGHT.",
+      n_discover: "Descubre", n_matches: "Matches", n_messages: "Mensajes", n_profile: "Perfil",
+      mt_title: "Matches", mt_sub: "Tu único match esta noche, y el mejor.", mt_tap: "Toca para ver el plan →",
+      mt_none: "Aún no tienes matches", mt_none_sub: "Desliza a la derecha a SWIPE RIGHT y mira qué pasa 😉", mt_back: "Volver a Descubre",
+      ms_online: "● En línea",
+      ms_hey: function(n){ return "Hola " + n + " 😏"; },
+      ms_ask: "¿Estás libre el sábado 5 de diciembre a las 4:30 p. m.? Voy a estar en pantalla grande en Cinemark, CC El Tesoro.",
+      ms_pre: "Desliza a la derecha si quieres venir conmigo 🎬", ms_reply: "Responde con un swipe right 💚",
+      ms_post: "Es una cita. Aquí tienes todo lo que necesitas 🎬",
+      pr_ok: "● Confirmado para el estreno", pr_pending: "● Pendiente: desliza a la derecha para confirmar",
+      pr_ticket: "Ver mi ticket", pr_edit: "Editar perfil",
+      m_its: "¡ES UN", m_match: "Match!",
+      m_sub: "Ahora sí, nos vemos en el estreno.",
+      see_plan: "Ver el plan",
+      d_step: "Paso 2 de 2",
+      d_title: "Es oficial: tienen una cita.",
+      d_sub: "Llega puntual y vístete como para una primera cita.",
+      d_tag: "ESTRENO · EN CINES",
+      rows: [["📅","Fecha","Sábado 5 de diciembre"],["🕗","Hora","4:30 p. m."],["🎟️","Lugar","Cinemark CC El Tesoro · Sala 9"],
+             ["📍","Dirección","Carrera 25A # 1A Sur – 45"],["🌆","Ciudad","Medellín"]],
+      d_btn: "Sigue para ver tu ticket",
+      t_title: "¡Estás en la lista!",
+      t_sub: "Tu lugar está guardado. Toma un pantallazo de este ticket y muéstralo en la entrada.",
+      t_ok: "● Confirmado para SWIPE RIGHT",
+      t_event: "Evento", t_event_v: "Premiere de SWIPE RIGHT",
+      t_when: "Cuándo", t_when_v: "Sábado 5 de diciembre · 4:30 p. m.",
+      t_where: "Dónde", t_where_v: "Cinemark CC El Tesoro · Sala 9 · Carrera 25A # 1A Sur – 45, Medellín",
+      t_name: "Nombre",
+      t_final: "No nos dejes plantados.",
+      t_copy: "📋 Copiar mis datos", t_copied: "✅ Copiado", t_done: "Listo",
+      t_bye: "¡Nos vemos en el estreno! 🎬",
+      t_copytxt: "Confirmo mi asistencia a la premiere de SWIPE RIGHT.",
+      t_phone: "Celular",
+      t_cal: "📆 Agregar al calendario",
+      f_title: "¡Casi listo!",
+      f_sub: "No pudimos guardar tu lugar automáticamente. Abre tu formulario <b>ya lleno</b> y toca <b>Enviar</b>.",
+      f_status: "● Falta un paso: toca Enviar en el formulario",
+      f_btn: "Abrir mi formulario (ya lleno)",
+      copy_manual: "Copia manual: "
     }
   };
 
+  /* ---------- language ---------- */
+  var lang = "en";
+  try{ lang = localStorage.getItem("sr-lang") || ""; }catch(_){ lang = ""; }
+  if(lang!=="en" && lang!=="es"){ lang = /^es/i.test(navigator.language||"") ? "es" : "en"; }
+  function t(k){ return L[lang][k]; }
+
   /* ---------- state ---------- */
-  var guest = { name: "", email: "", photo: null };
+  var guest = { name: "", email: "", phone: "", photo: null };
   var photoIndex = 0;
   var accepted = false;
+  var tab = "discover";
 
-  /* Guest's answers as form fields. */
-  function formParams(){
-    var f = CONFIG.form, p = new URLSearchParams();
-    if(f.nameEntry)  p.append(f.nameEntry, guest.name || "");
-    if(f.emailEntry) p.append(f.emailEntry, guest.email || "");
-    if(f.fixed){ Object.keys(f.fixed).forEach(function(k){ p.append(k, f.fixed[k]); }); }
-    return p;
+  var $ = function(s, r){ return (r||document).querySelector(s); };
+  var $$ = function(s, r){ return Array.prototype.slice.call((r||document).querySelectorAll(s)); };
+  function esc(s){
+    return String(s).replace(/[&<>"']/g, function(c){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c];
+    });
   }
 
-  /* Google Form URL pre-filled with the guest's data — only used as a fallback if the silent send fails. */
+  /* Paint every text in the current language. */
+  function applyLang(){
+    document.documentElement.lang = lang;
+    $$("#lang span").forEach(function(s){ s.classList.toggle("on", s.getAttribute("data-l")===lang); });
+    $$("[data-t]").forEach(function(el){ el.textContent = t(el.getAttribute("data-t")); });
+    $$("[data-tp]").forEach(function(el){ el.placeholder = t(el.getAttribute("data-tp")); });
+    var tz = $("#teaser"); tz.innerHTML = "";
+    [["📅", t("teaserDate")], ["📍", t("teaserPlace")]].forEach(function(r){
+      var s = document.createElement("span"); s.textContent = r[0] + " " + r[1]; tz.appendChild(s);
+    });
+    var pills = $("#sr-pills"); pills.innerHTML = "";
+    t("c_tags").forEach(function(x){ var s = document.createElement("span"); s.className="pill"; s.textContent=x; pills.appendChild(s); });
+    $("#copy-btn").textContent = t("t_copy");
+    renderTab(); buildDetails(); buildDone();
+  }
+  $("#lang").addEventListener("click", function(){
+    lang = lang === "en" ? "es" : "en";
+    try{ localStorage.setItem("sr-lang", lang); }catch(_){}
+    applyLang();
+  });
+
+  /* ---------- Google Form ---------- */
+  function formParams(){
+    var f = CONFIG.form, p = new URLSearchParams();
+    if(f.nameEntry)  p.append(f.nameEntry, guest.name);
+    if(f.emailEntry) p.append(f.emailEntry, guest.email);
+    if(f.phoneEntry) p.append(f.phoneEntry, guest.phone);
+    return p;
+  }
+  /* Pre-filled form link — only shown if the background send fails. */
   function formUrl(){
     var f = CONFIG.form;
     if(!f || !f.base) return "";
-    var sep = f.base.indexOf("?") >= 0 ? "&" : "?";
-    return f.base + sep + "usp=pp_url&" + formParams().toString();
+    return f.base + (f.base.indexOf("?") >= 0 ? "&" : "?") + "usp=pp_url&" + formParams().toString();
   }
-
-  /* Send the RSVP straight to the Google Form's response endpoint, in the background.
-     no-cors means we can't read Google's reply; a network error is the only failure we can see. */
+  /* no-cors: Google's reply can't be read; a network error is the only failure we can see. */
   var rsvp = "idle"; // idle | sent | failed
   function submitRSVP(){
     var f = CONFIG.form;
     if(!f || !f.base){ rsvp = "sent"; return; }
-    var action = f.base.replace(/\/viewform.*$/, "/formResponse");
     try{
-      fetch(action, { method:"POST", mode:"no-cors", body: formParams() })
+      fetch(f.base.replace(/\/viewform.*$/, "/formResponse"), { method:"POST", mode:"no-cors", body: formParams() })
         .then(function(){ rsvp = "sent"; })
         .catch(function(){ rsvp = "failed"; });
     }catch(_){ rsvp = "failed"; }
   }
-
-  var $ = function(s, r){ return (r||document).querySelector(s); };
-  var $$ = function(s, r){ return Array.prototype.slice.call((r||document).querySelectorAll(s)); };
 
   /* ---------- screen router ---------- */
   function show(id){
@@ -667,33 +829,26 @@ a.btn{display:block;text-align:center;text-decoration:none}
   $$("[data-back]").forEach(function(b){ b.addEventListener("click", function(){ show(b.getAttribute("data-back")); }); });
 
   /* ============================================================
-     SPLASH
+     1. WELCOME → 2. PROFILE
      ============================================================ */
-  (function(){
-    var t = $("#teaser");
-    [["📅", CONFIG.event.teaserDate], ["📍", CONFIG.event.teaserPlace]].forEach(function(r){
-      if(!val(r[1])) return;
-      var s = document.createElement("span"); s.textContent = r[0] + " " + r[1]; t.appendChild(s);
-    });
-  })();
   $("#go-create").addEventListener("click", function(){ show("create"); $("#name-input").focus(); });
 
-  /* ============================================================
-     CREATE PROFILE
-     ============================================================ */
-  var nameInput = $("#name-input");
-  var emailInput = $("#email-input");
+  var nameInput = $("#name-input"), emailInput = $("#email-input"), phoneInput = $("#phone-input");
   var goDiscover = $("#go-discover");
   function validEmail(s){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s); }
   function checkCreate(){
     guest.name = nameInput.value.trim();
     guest.email = emailInput.value.trim();
-    goDiscover.disabled = !(guest.name.length >= 2 && validEmail(guest.email));
+    guest.phone = phoneInput.value.trim();
+    goDiscover.disabled = !(guest.name.length >= 2 && validEmail(guest.email) && guest.phone.replace(/\D/g,"").length >= 7);
   }
-  nameInput.addEventListener("input", checkCreate);
-  emailInput.addEventListener("input", checkCreate);
-  nameInput.addEventListener("keydown", function(e){ if(e.key==="Enter") emailInput.focus(); });
-  emailInput.addEventListener("keydown", function(e){ if(e.key==="Enter" && !goDiscover.disabled) goDiscover.click(); });
+  [nameInput, emailInput, phoneInput].forEach(function(el, i, all){
+    el.addEventListener("input", checkCreate);
+    el.addEventListener("keydown", function(e){
+      if(e.key!=="Enter") return;
+      if(all[i+1]) all[i+1].focus(); else if(!goDiscover.disabled) goDiscover.click();
+    });
+  });
 
   var photoInput = $("#photo-input");
   photoInput.addEventListener("change", function(){
@@ -702,51 +857,29 @@ a.btn{display:block;text-align:center;text-decoration:none}
     var reader = new FileReader();
     reader.onload = function(ev){
       guest.photo = ev.target.result;
-      var img = $("#avatar-img");
-      img.src = guest.photo; img.hidden = false;
+      var img = $("#avatar-img"); img.src = guest.photo; img.hidden = false;
       $("#avatar-ph").hidden = true;
     };
     reader.readAsDataURL(f);
   });
 
-  goDiscover.addEventListener("click", function(){ buildProfile(); tab = "discover"; renderTab(); show("discover"); });
+  goDiscover.addEventListener("click", function(){ tab = "discover"; renderTab(); show("discover"); });
 
   /* ============================================================
-     DISCOVER — build the SR profile card
+     3. CARD — key art slides
      ============================================================ */
-  function buildProfile(){
-    var p = CONFIG.profile;
-    $("#sr-name").textContent = p.name;
-    $("#sr-chip").textContent = p.chip;
-    $("#sr-loc").textContent = p.location;
-    $("#sr-bio").textContent = p.bio;
-
-    var pills = $("#sr-pills"); pills.innerHTML = "";
-    p.interests.forEach(function(t){
-      var s = document.createElement("span"); s.className="pill"; s.textContent=t; pills.appendChild(s);
-    });
-
-    var photos = $("#photos"); photos.innerHTML = "";
-    var bars = $("#bars-top"); bars.innerHTML = "";
-    p.photos.forEach(function(ph, i){
+  (function buildPhotos(){
+    var photos = $("#photos"), bars = $("#bars-top");
+    CONFIG.photos.forEach(function(ph, i){
       var el = document.createElement("div");
       el.className = "photo" + (i===0 ? " show" : "");
-      if(ph.img){
-        el.innerHTML = '<div class="art"><img src="'+ph.img+'" alt="" style="width:100%;height:100%;object-fit:cover"></div><div class="scrim"></div>';
-      } else {
-        el.innerHTML =
-          '<div class="art" style="background:'+ph.grad+'"></div>'+
-          '<div class="ka">'+
-            '<img class="srlogo" src="sr-logo-white.png" alt="SWIPE RIGHT">'+
-          '</div>'+
-          '<div class="scrim"></div>';
-      }
+      el.innerHTML = ph.img
+        ? '<div class="art"><img src="'+ph.img+'" alt="" style="width:100%;height:100%;object-fit:cover"></div><div class="scrim"></div>'
+        : '<div class="art" style="background:'+ph.grad+'"></div><div class="ka"><img class="srlogo" src="sr-logo-white.png" alt="SWIPE RIGHT"></div><div class="scrim"></div>';
       photos.appendChild(el);
       var bar = document.createElement("i"); if(i===0) bar.className="on"; bars.appendChild(bar);
     });
-    photoIndex = 0;
-  }
-
+  })();
   function setPhoto(i){
     var ph = $$(".photo"); if(!ph.length) return;
     photoIndex = (i + ph.length) % ph.length;
@@ -754,27 +887,20 @@ a.btn{display:block;text-align:center;text-decoration:none}
     $$("#bars-top i").forEach(function(b,idx){ b.classList.toggle("on", idx===photoIndex); });
   }
 
-  /* ---------- toast ---------- */
   var toastTimer;
   function toast(msg){
-    var t = $("#toast"); t.textContent = msg; t.classList.add("show");
-    clearTimeout(toastTimer); toastTimer = setTimeout(function(){ t.classList.remove("show"); }, 2200);
+    var el = $("#toast"); el.textContent = msg; el.classList.add("show");
+    clearTimeout(toastTimer); toastTimer = setTimeout(function(){ el.classList.remove("show"); }, 2200);
   }
 
-  /* ============================================================
-     SWIPE mechanics
-     ============================================================ */
-  var card = $("#card");
-  var deck = $("#deck");
+  /* ---------- swipe mechanics ---------- */
+  var card = $("#card"), deck = $("#deck");
   var dragging=false, startX=0, startY=0, dx=0, dy=0, moved=false, pid=null;
   var THRESH = 110;
-
   function onDown(e){
     if(accepted) return;
-    if(e.target.closest(".tapzone")) { /* allow tap handling but still track */ }
     dragging=true; moved=false;
-    startX = e.clientX; startY = e.clientY; dx=0; dy=0;
-    pid = e.pointerId;
+    startX = e.clientX; startY = e.clientY; dx=0; dy=0; pid = e.pointerId;
     card.classList.add("dragging"); card.classList.remove("reset");
     try{ card.setPointerCapture(pid); }catch(_){}
   }
@@ -782,31 +908,25 @@ a.btn{display:block;text-align:center;text-decoration:none}
     if(!dragging) return;
     dx = e.clientX - startX; dy = e.clientY - startY;
     if(Math.abs(dx)>6 || Math.abs(dy)>6) moved=true;
-    var rot = dx/18;
-    card.style.transform = "translate("+dx+"px,"+(dy*0.25)+"px) rotate("+rot+"deg)";
-    var likeP = Math.max(0, Math.min(1, dx/THRESH));
-    var nopeP = Math.max(0, Math.min(1, -dx/THRESH));
-    $("#stamp-like").style.opacity = likeP;
-    $("#stamp-nope").style.opacity = nopeP;
+    card.style.transform = "translate("+dx+"px,"+(dy*0.25)+"px) rotate("+(dx/18)+"deg)";
+    $("#stamp-like").style.opacity = Math.max(0, Math.min(1, dx/THRESH));
+    $("#stamp-nope").style.opacity = Math.max(0, Math.min(1, -dx/THRESH));
   }
   function onUp(e){
     if(!dragging) return;
     dragging=false; card.classList.remove("dragging");
     try{ card.releasePointerCapture(pid); }catch(_){}
-    // tap (no real move) → cycle photos
-    if(!moved){
+    if(!moved){ // tap → cycle photos
       var zone = e.target.closest(".tapzone");
       if(zone){ setPhoto(photoIndex + parseInt(zone.getAttribute("data-tap"),10)); }
-      springBack();
-      return;
+      springBack(); return;
     }
     if(dx > THRESH){ fly(1); accept(); }
     else if(dx < -THRESH){ springBack(); nudge(); }
     else { springBack(); }
   }
   function springBack(){
-    card.classList.add("reset");
-    card.style.transform = "";
+    card.classList.add("reset"); card.style.transform = "";
     $("#stamp-like").style.opacity=0; $("#stamp-nope").style.opacity=0;
   }
   function fly(dir){
@@ -815,89 +935,72 @@ a.btn{display:block;text-align:center;text-decoration:none}
     card.style.transform = "translate("+(dir*w)+"px,-40px) rotate("+(dir*22)+"deg)";
     card.style.opacity = 0;
   }
-
   card.addEventListener("pointerdown", onDown);
   card.addEventListener("pointermove", onMove);
   card.addEventListener("pointerup", onUp);
   card.addEventListener("pointercancel", onUp);
 
-  /* "you can't say no to swipe right" */
-  var nudges = [
-    "Nobody says no to SWIPE RIGHT 😏",
-    "Are you sure? The giant screen is waiting…",
-    "Nobody swipes nope on a premiere. Swipe right →"
-  ];
   var nudgeI = 0;
-  function nudge(){ toast(nudges[nudgeI % nudges.length]); nudgeI++; }
-
-  /* ---------- action buttons ---------- */
+  function nudge(){ var n = t("nudges"); toast(n[nudgeI % n.length]); nudgeI++; }
   $("#act-like").addEventListener("click", function(){ if(accepted) return; fly(1); accept(); });
-  $("#act-star").addEventListener("click", function(){ if(accepted) return; toast("💫 Super like — we can't wait to see you!"); fly(1); accept(); });
+  $("#act-star").addEventListener("click", function(){ if(accepted) return; toast(t("superlike")); fly(1); accept(); });
   $("#act-nope").addEventListener("click", function(){ if(accepted) return; nudge(); });
 
-  /* ============================================================
-     BOTTOM NAV — Discover / Matches / Messages / Profile
-     ============================================================ */
-  var tab = "discover";
+  /* ---------- bottom nav ---------- */
   function avatarHtml(){ return guest.photo ? '<img src="'+guest.photo+'" alt="">' : "👤"; }
   function renderTab(){
     $$(".nav a").forEach(function(a){ a.classList.toggle("on", a.getAttribute("data-tab")===tab); });
     $$("#discover .pane").forEach(function(p){ p.classList.toggle("on", p.id==="pane-"+tab); });
-    var e = CONFIG.event, first = (guest.name||"").split(" ")[0] || "you";
+    var first = (guest.name||"").split(" ")[0];
 
     if(tab==="matches"){
       $("#pane-matches").innerHTML = accepted
-        ? '<h3>Matches</h3><p class="sub">Your only match tonight — and the best one.</p>'+
+        ? '<h3>'+esc(t("mt_title"))+'</h3><p class="sub">'+esc(t("mt_sub"))+'</p>'+
           '<button class="mtile" data-goto="details"><span class="av">SWIPE<br>RIGHT</span>'+
-          '<span><span class="t">SWIPE RIGHT</span><span class="s" style="display:block">Tap to see the premiere details →</span></span></button>'
-        : '<div class="lock"><div class="big">🔒</div><h3>No matches yet</h3>'+
-          '<p class="sub">Swipe right on SWIPE RIGHT and see what happens 😉</p>'+
-          '<button class="btn" data-tab="discover">Back to Discover</button></div>';
+          '<span><span class="t">SWIPE RIGHT</span><span class="s" style="display:block">'+esc(t("mt_tap"))+'</span></span></button>'
+        : '<div class="lock"><div class="big">🔒</div><h3>'+esc(t("mt_none"))+'</h3>'+
+          '<p class="sub">'+esc(t("mt_none_sub"))+'</p>'+
+          '<button class="btn" data-tab="discover">'+esc(t("mt_back"))+'</button></div>';
     }
     if(tab==="messages"){
       $("#msg-dot").hidden = true;
-      var h = '<div class="chat"><div class="who"><span class="av">SWIPE<br>RIGHT</span><div><b>SWIPE RIGHT</b><span>● Online</span></div></div>'+
-        '<div class="bub">Hey '+escapeHtml(first)+' 😏</div>'+
-        '<div class="bub">Are you free on '+escapeHtml((e.teaserDate||"").replace(" · "," at "))+'? I\'ll be on the big screen at '+escapeHtml((e.teaserPlace||"").replace(" · "," "))+'.</div>';
+      var h = '<div class="chat"><div class="who"><span class="av">SWIPE<br>RIGHT</span><div><b>SWIPE RIGHT</b><span>'+esc(t("ms_online"))+'</span></div></div>'+
+        '<div class="bub">'+esc(t("ms_hey")(first).replace("  "," "))+'</div>'+
+        '<div class="bub">'+esc(t("ms_ask"))+'</div>';
       h += accepted
-        ? '<div class="bub me">💚</div><div class="bub">It\'s a date. Here\'s everything you need 🎬</div>'+
-          '<button class="btn" data-goto="details">See the premiere details</button>'
-        : '<div class="bub">Swipe right if you want to come with me 🎬</div>'+
-          '<button class="btn" data-tab="discover">Reply with a swipe right 💚</button>';
+        ? '<div class="bub me">💚</div><div class="bub">'+esc(t("ms_post"))+'</div>'+
+          '<button class="btn" data-goto="details">'+esc(t("see_plan"))+'</button>'
+        : '<div class="bub">'+esc(t("ms_pre"))+'</div>'+
+          '<button class="btn" data-tab="discover">'+esc(t("ms_reply"))+'</button>';
       $("#pane-messages").innerHTML = h + '</div>';
     }
     if(tab==="profile"){
       $("#pane-profile").innerHTML = '<div class="prof"><div class="av">'+avatarHtml()+'</div>'+
-        '<div class="nm">'+escapeHtml(guest.name||"")+'</div><div class="em">'+escapeHtml(guest.email||"")+'</div>'+
+        '<div class="nm">'+esc(guest.name)+'</div><div class="em">'+esc(guest.email)+'<br>'+esc(guest.phone)+'</div>'+
         (accepted
-          ? '<div class="st" style="color:var(--like-2)">● Confirmed for the premiere</div><button class="btn" data-goto="done">See my ticket</button>'
-          : '<div class="st" style="color:var(--star-1)">● Pending: swipe right to confirm</div><button class="btn ghost" data-goto="create">Edit profile</button>')+
+          ? '<div class="st" style="color:var(--like-2)">'+esc(t("pr_ok"))+'</div><button class="btn" data-goto="done">'+esc(t("pr_ticket"))+'</button>'
+          : '<div class="st" style="color:var(--star-1)">'+esc(t("pr_pending"))+'</div><button class="btn ghost" data-goto="create">'+esc(t("pr_edit"))+'</button>')+
         '</div>';
     }
   }
   $("#discover").addEventListener("click", function(ev){
-    var t = ev.target.closest("[data-tab]");
-    if(t){ ev.preventDefault(); tab = t.getAttribute("data-tab"); renderTab(); return; }
+    var tb = ev.target.closest("[data-tab]");
+    if(tb){ ev.preventDefault(); tab = tb.getAttribute("data-tab"); renderTab(); return; }
     var g = ev.target.closest("[data-goto]");
-    if(g){
-      var to = g.getAttribute("data-goto");
-      if(to==="details") buildDetails();
-      if(to==="done") buildDone();
-      show(to);
-    }
+    if(g){ show(g.getAttribute("data-goto")); }
   });
 
+  /* ============================================================
+     4. MATCH
+     ============================================================ */
   function accept(){
     if(accepted) return;
     accepted = true;
     submitRSVP();
     $("#discover .actions").style.visibility = "hidden";
     $("#deck-empty").style.visibility = "visible";
-    // fill match screen avatars
-    var you = $("#match-you");
-    if(guest.photo){ you.innerHTML = '<img src="'+guest.photo+'" alt="">'; }
-    $("#match-name").textContent = (guest.name || "").split(" ")[0] || "superstar";
-    var art = CONFIG.profile.photos[0];
+    if(guest.photo){ $("#match-you").innerHTML = '<img src="'+guest.photo+'" alt="">'; }
+    var art = CONFIG.photos[0];
     if(art && art.img){ $("#match-sr").innerHTML = '<img src="'+art.img+'" alt="">'; }
     var burst = $("#burst"); burst.innerHTML = "";
     for(var i=0;i<18;i++){
@@ -910,90 +1013,68 @@ a.btn{display:block;text-align:center;text-decoration:none}
       h.style.animationDelay = (Math.random()*5)+"s";
       burst.appendChild(h);
     }
+    renderTab(); buildDone();
     setTimeout(function(){ show("match"); }, 480);
   }
-
-  $("#go-details").addEventListener("click", function(){ buildDetails(); show("details"); });
+  $("#go-details").addEventListener("click", function(){ show("details"); });
 
   /* ============================================================
-     DETAILS
+     5. CONFIRMATION
      ============================================================ */
-  function val(v){ return (v && String(v).trim()) ? String(v) : null; }
   function buildDetails(){
-    var e = CONFIG.event;
-    var rows = [
-      { ic:"📅", k:"Date",      v: val(e.date),    todo:"Date to be confirmed" },
-      { ic:"🕗", k:"Time",      v: val(e.time),    todo:"Time to be confirmed" },
-      { ic:"🎟️", k:"Venue",     v: val(e.venue),   todo:"Theater to be confirmed" },
-      { ic:"🎬", k:"Screen",    v: val(e.hall),    todo:"Screen to be confirmed" },
-      { ic:"📍", k:"Address",   v: val(e.address), todo:"Address to be confirmed" },
-      { ic:"🌆", k:"City",      v: val(e.city),    todo:"City to be confirmed" }
-    ];
-    if(val(e.dress)) rows.push({ ic:"👗", k:"Dress code", v: val(e.dress) });
-    var host = $("#detail-rows"); host.innerHTML="";
-    rows.forEach(function(r){
+    var host = $("#detail-rows"); host.innerHTML = "";
+    t("rows").forEach(function(r){
       var div = document.createElement("div"); div.className="row";
-      div.innerHTML = '<span class="ic">'+r.ic+'</span><div style="min-width:0"><div class="k">'+r.k+'</div>'+
-        (r.v ? '<div class="v">'+escapeHtml(r.v)+'</div>' : '<div class="v todo">'+r.todo+'</div>')+'</div>';
+      div.innerHTML = '<span class="ic">'+r[0]+'</span><div style="min-width:0"><div class="k">'+esc(r[1])+'</div><div class="v">'+esc(r[2])+'</div></div>';
       host.appendChild(div);
     });
   }
-
   $("#go-confirm").addEventListener("click", function(){ buildDone(); show("done"); });
 
   /* ============================================================
-     DONE
+     6. TICKET
      ============================================================ */
   function buildDone(){
-    $("#done-name").textContent = guest.name || "Invitado";
-    var av = $("#done-av");
-    if(guest.photo){ av.innerHTML = '<img src="'+guest.photo+'" alt="">'; }
-    var e = CONFIG.event;
-    var when = [val(e.date), val(e.time)].filter(Boolean).join(" · ") || "Date and time to be confirmed";
-    var where = [val(e.venue), val(e.hall), val(e.city)].filter(Boolean).join(" · ") || "Venue to be confirmed";
-    // Only if the background send failed (e.g. no signal): offer the pre-filled form as a backup.
     var url = rsvp === "failed" ? formUrl() : "";
-
+    $("#done-title").textContent = url ? t("f_title") : t("t_title");
+    $("#done-sub").innerHTML = url ? t("f_sub") : esc(t("t_sub"));
+    $("#done-name").textContent = guest.name;
+    if(guest.photo){ $("#done-av").innerHTML = '<img src="'+guest.photo+'" alt="">'; }
     var st = $("#done-status");
-    st.textContent = url ? "● One more step: tap Submit on the form" : "● Confirmed for SWIPE RIGHT";
+    st.textContent = url ? t("f_status") : t("t_ok");
     st.style.color = url ? "var(--star-1)" : "var(--like-2)";
-    if(url){
-      $("#done-title").textContent = "Almost there!";
-      $("#done-sub").innerHTML = "We couldn't save your spot automatically. Open your <b>pre-filled</b> form and tap <b>Submit</b>.";
-    }
-
     $("#done-detail").innerHTML =
-      '<b>Event:</b> SWIPE RIGHT premiere<br>'+
-      '<b>When:</b> '+escapeHtml(when)+'<br>'+
-      '<b>Where:</b> '+escapeHtml(where)+'<br>'+
-      '<b>Name:</b> '+escapeHtml(guest.name || "")+' · '+escapeHtml(guest.email || "");
+      '<b>'+esc(t("t_event"))+':</b> '+esc(t("t_event_v"))+'<br>'+
+      '<b>'+esc(t("t_when"))+':</b> '+esc(t("t_when_v"))+'<br>'+
+      '<b>'+esc(t("t_where"))+':</b> '+esc(t("t_where_v"))+'<br>'+
+      '<b>'+esc(t("t_name"))+':</b> '+esc(guest.name)+' · '+esc(guest.email);
 
     var cta = $("#done-cta"); cta.innerHTML="";
     if(url){
       var af = document.createElement("a"); af.className="btn"; af.href=url;
-      af.target="_blank"; af.rel="noopener"; af.textContent="Open my form (pre-filled)";
+      af.target="_blank"; af.rel="noopener"; af.textContent=t("f_btn");
       cta.appendChild(af);
     }
-    if(val(CONFIG.calendarUrl)){
+    if(CONFIG.calendarUrl){
       var a = document.createElement("a"); a.className="btn"+(url?" outline":""); a.href=CONFIG.calendarUrl;
-      a.target="_blank"; a.rel="noopener"; a.textContent="📆 Add to calendar";
+      a.target="_blank"; a.rel="noopener"; a.textContent=t("t_cal");
       cta.appendChild(a);
     }
     if(!cta.children.length){
-      var b = document.createElement("button"); b.className="btn ghost"; b.textContent="Done";
-      b.addEventListener("click", function(){ toast("See you at the premiere! 🎬"); });
+      var b = document.createElement("button"); b.className="btn ghost"; b.textContent=t("t_done");
+      b.addEventListener("click", function(){ toast(t("t_bye")); });
       cta.appendChild(b);
     }
   }
 
   $("#copy-btn").addEventListener("click", function(){
-    var e = CONFIG.event;
-    var txt = "I'm confirming my attendance at the SWIPE RIGHT premiere.\n"+
-      "Name: "+(guest.name||"")+"\n"+
-      "Email: "+(guest.email||"")+"\n"+
-      "Event: "+[val(e.date),val(e.time),val(e.venue),val(e.hall),val(e.city)].filter(Boolean).join(" · ");
+    var txt = t("t_copytxt")+"\n"+
+      t("t_name")+": "+guest.name+"\n"+
+      "Email: "+guest.email+"\n"+
+      t("t_phone")+": "+guest.phone+"\n"+
+      t("t_event")+": "+t("t_when_v")+" · "+t("t_where_v");
     var btn = $("#copy-btn");
-    function ok(){ btn.textContent="✅ Copied"; setTimeout(function(){ btn.innerHTML="📋 Copy my details"; }, 1800); }
+    function ok(){ btn.textContent=t("t_copied"); setTimeout(function(){ btn.textContent=t("t_copy"); }, 1800); }
     if(navigator.clipboard && navigator.clipboard.writeText){
       navigator.clipboard.writeText(txt).then(ok).catch(function(){ legacyCopy(txt, ok); });
     } else { legacyCopy(txt, ok); }
@@ -1002,15 +1083,10 @@ a.btn{display:block;text-align:center;text-decoration:none}
     try{
       var ta=document.createElement("textarea"); ta.value=txt; ta.style.position="fixed"; ta.style.opacity="0";
       document.body.appendChild(ta); ta.select(); document.execCommand("copy"); document.body.removeChild(ta); ok();
-    }catch(_){ toast("Copy manually: "+txt.slice(0,40)+"…"); }
+    }catch(_){ toast(t("copy_manual")+txt.slice(0,40)+"…"); }
   }
 
-  function escapeHtml(s){
-    return String(s).replace(/[&<>"']/g, function(c){
-      return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c];
-    });
-  }
-
+  applyLang();
 })();
 </script>
 </body>
