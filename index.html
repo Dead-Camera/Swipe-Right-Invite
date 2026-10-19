@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Invitacion digital a la premiere en cines de SWIPE RIGHT - Dead Camera Studios">
+<meta name="description" content="Digital invitation to the SWIPE RIGHT theatrical premiere - Dead Camera Studios">
 <style>html,body{height:100%}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Premiere SWIPE RIGHT</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -331,12 +331,12 @@ a.btn{display:block;text-align:center;text-decoration:none}
     </div>
     <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center">
       <div class="logo" style="font-size:42px"><span class="mark">🔥</span><span class="word">binder</span></div>
-      <h1>Hiciste match con la<br>premiere de <span style="background:var(--flame);-webkit-background-clip:text;background-clip:text;color:transparent">SWIPE RIGHT</span></h1>
-      <p>Una noche. Pantalla gigante. Toda la temporada 1. Crea tu perfil y desliza para aceptar tu invitación.</p>
+      <h1>You matched with the<br><span style="background:var(--flame);-webkit-background-clip:text;background-clip:text;color:transparent">SWIPE RIGHT</span> premiere</h1>
+      <p>One night. One giant screen. All of season 1. Create your profile and swipe to accept your invitation.</p>
     </div>
     <div class="foot" style="padding:0 30px 34px">
-      <button class="btn" id="go-create">Crear mi perfil</button>
-      <div class="by muted" style="text-align:center">Dead Camera Studios · Invitación digital</div>
+      <button class="btn" id="go-create">Create my profile</button>
+      <div class="by muted" style="text-align:center">Dead Camera Studios · Digital invitation</div>
     </div>
   </section>
 
@@ -346,14 +346,14 @@ a.btn{display:block;text-align:center;text-decoration:none}
       <span class="sig"><span>5G</span><span class="bars"><i></i><i></i><i></i><i></i></span></span>
       <span class="batt"><span></span></span>
     </div>
-    <div class="apphead"><button class="back" data-back="splash" aria-label="Atrás">‹</button>
+    <div class="apphead"><button class="back" data-back="splash" aria-label="Back">‹</button>
       <div class="logo" style="font-size:22px"><span class="mark">🔥</span><span class="word">binder</span></div>
     </div>
     <div class="body">
       <div>
-        <div class="eyebrow">Paso 1 de 2</div>
-        <h2>Crea tu perfil</h2>
-        <p class="sub">Así te reconocemos en la puerta y te enviamos tu entrada digital.</p>
+        <div class="eyebrow">Step 1 of 2</div>
+        <h2>Create your profile</h2>
+        <p class="sub">So we can recognize you at the door and send you your digital ticket.</p>
       </div>
 
       <div class="avatar-pick">
@@ -365,20 +365,20 @@ a.btn{display:block;text-align:center;text-decoration:none}
           </span>
         </label>
         <input type="file" id="photo-input" accept="image/*" hidden>
-        <span class="hint">Toca para subir una foto (opcional)</span>
+        <span class="hint">Tap to add a photo (optional)</span>
       </div>
 
       <div class="field">
-        <label class="lab" for="name-input">Tu nombre</label>
-        <input id="name-input" type="text" placeholder="¿Cómo apareces en los créditos?" autocomplete="name" maxlength="40">
+        <label class="lab" for="name-input">Your name</label>
+        <input id="name-input" type="text" placeholder="How do you appear in the credits?" autocomplete="name" maxlength="40">
       </div>
       <div class="field">
-        <label class="lab" for="email-input">Tu correo</label>
-        <input id="email-input" type="email" placeholder="Para enviarte tu entrada digital" autocomplete="email" maxlength="80">
+        <label class="lab" for="email-input">Your email</label>
+        <input id="email-input" type="email" placeholder="So we can send you your digital ticket" autocomplete="email" maxlength="80">
       </div>
     </div>
     <div class="foot">
-      <button class="btn" id="go-discover" disabled>Entrar a binder</button>
+      <button class="btn" id="go-discover" disabled>Enter binder</button>
     </div>
   </section>
 
@@ -401,8 +401,8 @@ a.btn{display:block;text-align:center;text-decoration:none}
         <div class="tapzone l" data-tap="-1"></div>
         <div class="tapzone r" data-tap="1"></div>
         <div class="info">
-          <div class="nm"><span id="sr-name">Swipe Right</span><span class="verified" title="Verificado">✓</span><span class="chip" id="sr-chip">S1</span></div>
-          <div class="loc"><span>📍</span><span id="sr-loc">En cines · Una sola noche</span></div>
+          <div class="nm"><span id="sr-name">Swipe Right</span><span class="verified" title="Verified">✓</span><span class="chip" id="sr-chip">S1</span></div>
+          <div class="loc"><span>📍</span><span id="sr-loc">In theaters · One night only</span></div>
           <div class="bio" id="sr-bio"></div>
           <div class="pills" id="sr-pills"></div>
         </div>
@@ -410,16 +410,16 @@ a.btn{display:block;text-align:center;text-decoration:none}
     </div>
 
     <div class="actions">
-      <button class="act sm nope" id="act-nope" aria-label="No">✕</button>
+      <button class="act sm nope" id="act-nope" aria-label="Nope">✕</button>
       <button class="act star" id="act-star" aria-label="Super like" style="width:56px;height:56px;font-size:23px">★</button>
       <button class="act lg like" id="act-like" aria-label="Match">💚</button>
     </div>
 
     <nav class="nav">
-      <a class="on"><span class="ic">🧭</span>Descubre</a>
+      <a class="on"><span class="ic">🧭</span>Discover</a>
       <a><span class="ic">♥</span>Matches</a>
-      <a><span class="ic">💬</span>Mensajes</a>
-      <a><span class="ic">👤</span>Perfil</a>
+      <a><span class="ic">💬</span>Messages</a>
+      <a><span class="ic">👤</span>Profile</a>
     </nav>
 
     <div class="toast" id="toast"></div>
@@ -427,33 +427,33 @@ a.btn{display:block;text-align:center;text-decoration:none}
 
   <!-- ============ MATCH ============ -->
   <section class="screen" id="match">
-    <div class="ismatch">¡Es un match!</div>
-    <p class="msub">A <b>SWIPE RIGHT</b> también le gustaste, <span class="ph-name" id="match-name">crack</span>.</p>
+    <div class="ismatch">It's a match!</div>
+    <p class="msub"><b>SWIPE RIGHT</b> likes you too, <span class="ph-name" id="match-name">superstar</span>.</p>
     <div class="match-avatars">
       <span class="a" id="match-you"><span class="ph" style="font-size:40px;opacity:.5">👤</span></span>
       <span class="heart">❤️</span>
       <span class="a sr"><span>SWIPE<br>RIGHT</span></span>
     </div>
     <div class="foot">
-      <button class="btn" id="go-details">Ver los detalles de la premiere</button>
+      <button class="btn" id="go-details">See the premiere details</button>
     </div>
   </section>
 
   <!-- ============ DETAILS ============ -->
   <section class="screen" id="details">
-    <div class="apphead" style="padding-top:18px"><button class="back" data-back="discover" aria-label="Atrás">‹</button>
+    <div class="apphead" style="padding-top:18px"><button class="back" data-back="discover" aria-label="Back">‹</button>
       <div class="logo" style="font-size:20px"><span class="mark">🔥</span><span class="word">binder</span></div>
     </div>
     <div class="scroll">
       <div>
-        <div class="eyebrow">Estás invitado · Paso 2 de 2</div>
-        <h2>La premiere de SWIPE RIGHT</h2>
-        <p class="lead">Proyección en pantalla grande de toda la temporada 1. Trae tu mejor cara de primera cita.</p>
+        <div class="eyebrow">You're invited · Step 2 of 2</div>
+        <h2>The SWIPE RIGHT premiere</h2>
+        <p class="lead">A big-screen showing of all of season 1. Bring your best first-date face.</p>
       </div>
 
       <div class="ticket">
         <div class="top">
-          <div><div class="t">SWIPE RIGHT</div><div class="s">PREMIERE · CINES</div></div>
+          <div><div class="t">SWIPE RIGHT</div><div class="s">PREMIERE · IN THEATERS</div></div>
           <div class="seal">🎬</div>
         </div>
         <div class="rows" id="detail-rows"></div>
@@ -461,8 +461,8 @@ a.btn{display:block;text-align:center;text-decoration:none}
 
     </div>
     <div class="foot">
-      <button class="btn" id="go-confirm">Ver mi entrada</button>
-      <div class="finep">Tu swipe right ya confirmó tu lugar. No tienes que llenar nada más.</div>
+      <button class="btn" id="go-confirm">See my ticket</button>
+      <div class="finep">Your swipe right already confirmed your spot. There's nothing else to fill out.</div>
     </div>
   </section>
 
@@ -470,20 +470,20 @@ a.btn{display:block;text-align:center;text-decoration:none}
   <section class="screen" id="done">
     <div class="scroll">
       <div class="seal">🎬</div>
-      <h2 id="done-title">¡Estás en la lista!</h2>
-      <p class="sub" id="done-sub">Tu lugar quedó guardado. Toma un pantallazo de esta entrada y muéstrala en la puerta.</p>
+      <h2 id="done-title">You're on the list!</h2>
+      <p class="sub" id="done-sub">Your spot is saved. Take a screenshot of this ticket and show it at the door.</p>
 
       <div class="passcard">
         <div class="who">
           <span class="av" id="done-av"><span class="ph" style="font-size:22px;opacity:.5">👤</span></span>
           <div>
-            <div class="nm" id="done-name">Invitado</div>
-            <div class="st" id="done-status">● Confirmado para SWIPE RIGHT</div>
+            <div class="nm" id="done-name">Guest</div>
+            <div class="st" id="done-status">● Confirmed for SWIPE RIGHT</div>
           </div>
         </div>
         <div class="detail" id="done-detail"></div>
       </div>
-      <button class="copybtn" id="copy-btn">📋 Copiar mis datos</button>
+      <button class="copybtn" id="copy-btn">📋 Copy my details</button>
     </div>
     <div class="foot">
       <div class="btn-row" id="done-cta"></div>
@@ -523,9 +523,9 @@ a.btn{display:block;text-align:center;text-decoration:none}
     profile: {
       name: "Swipe Right",
       chip: "S1",
-      location: "En cines · Una sola noche",
-      bio: "Crimen, amor tóxico y una huida de Ohio a Tokio a Colombia. Toda la temporada 1 en pantalla gigante, por una sola noche. Desliza a la derecha si te atreves a acompañarnos.",
-      interests: ["Premiere", "Pantalla gigante", "Crimen & romance", "100% IA", "Dead Camera Studios"],
+      location: "In theaters · One night only",
+      bio: "Crime, toxic love and a getaway from Ohio to Tokyo to Colombia. All of season 1 on the big screen, for one night only. Swipe right if you dare to join us.",
+      interests: ["Premiere", "Giant screen", "Crime & romance", "100% AI", "Dead Camera Studios"],
       // Slots de key art (placeholder). Reemplaza cada uno por una imagen cuando quieras.
       photos: [
         { label: "Key art 01", grad: "linear-gradient(145deg,#ff5864,#fd267a)" },
@@ -647,8 +647,8 @@ a.btn{display:block;text-align:center;text-decoration:none}
         el.innerHTML =
           '<div class="art" style="background:'+ph.grad+'"></div>'+
           '<div class="ka">'+
-            '<div class="srword">SWIPE<br>RIGHT<small>SERIE · IA</small></div>'+
-            '<div class="slot">'+ph.label+' · reemplazar</div>'+
+            '<div class="srword">SWIPE<br>RIGHT<small>SERIES · AI</small></div>'+
+            '<div class="slot">'+ph.label+' · replace</div>'+
           '</div>'+
           '<div class="scrim"></div>';
       }
@@ -734,16 +734,16 @@ a.btn{display:block;text-align:center;text-decoration:none}
 
   /* "you can't say no to swipe right" */
   var nudges = [
-    "A SWIPE RIGHT no se le dice que no 😏",
-    "¿Seguro? La pantalla gigante te espera…",
-    "Nadie hace nope a una premiere. Desliza a la derecha →"
+    "Nobody says no to SWIPE RIGHT 😏",
+    "Are you sure? The giant screen is waiting…",
+    "Nobody swipes nope on a premiere. Swipe right →"
   ];
   var nudgeI = 0;
   function nudge(){ toast(nudges[nudgeI % nudges.length]); nudgeI++; }
 
   /* ---------- action buttons ---------- */
   $("#act-like").addEventListener("click", function(){ if(accepted) return; fly(1); accept(); });
-  $("#act-star").addEventListener("click", function(){ if(accepted) return; toast("💫 Super like — ¡te esperamos!"); fly(1); accept(); });
+  $("#act-star").addEventListener("click", function(){ if(accepted) return; toast("💫 Super like — we can't wait to see you!"); fly(1); accept(); });
   $("#act-nope").addEventListener("click", function(){ if(accepted) return; nudge(); });
 
   function accept(){
@@ -766,13 +766,13 @@ a.btn{display:block;text-align:center;text-decoration:none}
   function buildDetails(){
     var e = CONFIG.event;
     var rows = [
-      { ic:"📅", k:"Fecha",     v: val(e.date),    todo:"Fecha por confirmar" },
-      { ic:"🕗", k:"Hora",      v: val(e.time),    todo:"Hora por confirmar" },
-      { ic:"🎟️", k:"Lugar",     v: val(e.venue),   todo:"Cine por confirmar" },
-      { ic:"📍", k:"Dirección", v: val(e.address), todo:"Dirección por confirmar" },
-      { ic:"🌆", k:"Ciudad",    v: val(e.city),    todo:"Ciudad por confirmar" }
+      { ic:"📅", k:"Date",      v: val(e.date),    todo:"Date to be confirmed" },
+      { ic:"🕗", k:"Time",      v: val(e.time),    todo:"Time to be confirmed" },
+      { ic:"🎟️", k:"Venue",     v: val(e.venue),   todo:"Theater to be confirmed" },
+      { ic:"📍", k:"Address",   v: val(e.address), todo:"Address to be confirmed" },
+      { ic:"🌆", k:"City",      v: val(e.city),    todo:"City to be confirmed" }
     ];
-    if(val(e.dress)) rows.push({ ic:"👗", k:"Código", v: val(e.dress) });
+    if(val(e.dress)) rows.push({ ic:"👗", k:"Dress code", v: val(e.dress) });
     var host = $("#detail-rows"); host.innerHTML="";
     rows.forEach(function(r){
       var div = document.createElement("div"); div.className="row";
@@ -792,51 +792,51 @@ a.btn{display:block;text-align:center;text-decoration:none}
     var av = $("#done-av");
     if(guest.photo){ av.innerHTML = '<img src="'+guest.photo+'" alt="">'; }
     var e = CONFIG.event;
-    var when = [val(e.date), val(e.time)].filter(Boolean).join(" · ") || "Fecha y hora por confirmar";
-    var where = [val(e.venue), val(e.city)].filter(Boolean).join(" · ") || "Sede por confirmar";
+    var when = [val(e.date), val(e.time)].filter(Boolean).join(" · ") || "Date and time to be confirmed";
+    var where = [val(e.venue), val(e.city)].filter(Boolean).join(" · ") || "Venue to be confirmed";
     // Only if the background send failed (e.g. no signal): offer the pre-filled form as a backup.
     var url = rsvp === "failed" ? formUrl() : "";
 
     var st = $("#done-status");
-    st.textContent = url ? "● Falta un paso: toca Enviar en el formulario" : "● Confirmado para SWIPE RIGHT";
+    st.textContent = url ? "● One more step: tap Submit on the form" : "● Confirmed for SWIPE RIGHT";
     st.style.color = url ? "var(--star-1)" : "var(--like-2)";
     if(url){
-      $("#done-title").textContent = "¡Casi listo!";
-      $("#done-sub").innerHTML = "No pudimos guardar tu lugar automáticamente. Abre tu formulario <b>ya lleno</b> y toca <b>Enviar</b>.";
+      $("#done-title").textContent = "Almost there!";
+      $("#done-sub").innerHTML = "We couldn't save your spot automatically. Open your <b>pre-filled</b> form and tap <b>Submit</b>.";
     }
 
     $("#done-detail").innerHTML =
-      '<b>Evento:</b> Premiere SWIPE RIGHT<br>'+
-      '<b>Cuándo:</b> '+escapeHtml(when)+'<br>'+
-      '<b>Dónde:</b> '+escapeHtml(where)+'<br>'+
-      '<b>A nombre de:</b> '+escapeHtml(guest.name || "")+' · '+escapeHtml(guest.email || "");
+      '<b>Event:</b> SWIPE RIGHT premiere<br>'+
+      '<b>When:</b> '+escapeHtml(when)+'<br>'+
+      '<b>Where:</b> '+escapeHtml(where)+'<br>'+
+      '<b>Name:</b> '+escapeHtml(guest.name || "")+' · '+escapeHtml(guest.email || "");
 
     var cta = $("#done-cta"); cta.innerHTML="";
     if(url){
       var af = document.createElement("a"); af.className="btn"; af.href=url;
-      af.target="_blank"; af.rel="noopener"; af.textContent="Abrir mi formulario (ya lleno)";
+      af.target="_blank"; af.rel="noopener"; af.textContent="Open my form (pre-filled)";
       cta.appendChild(af);
     }
     if(val(CONFIG.calendarUrl)){
       var a = document.createElement("a"); a.className="btn"+(url?" outline":""); a.href=CONFIG.calendarUrl;
-      a.target="_blank"; a.rel="noopener"; a.textContent="📆 Agregar al calendario";
+      a.target="_blank"; a.rel="noopener"; a.textContent="📆 Add to calendar";
       cta.appendChild(a);
     }
     if(!cta.children.length){
-      var b = document.createElement("button"); b.className="btn ghost"; b.textContent="Listo";
-      b.addEventListener("click", function(){ toast("¡Nos vemos en la premiere! 🎬"); });
+      var b = document.createElement("button"); b.className="btn ghost"; b.textContent="Done";
+      b.addEventListener("click", function(){ toast("See you at the premiere! 🎬"); });
       cta.appendChild(b);
     }
   }
 
   $("#copy-btn").addEventListener("click", function(){
     var e = CONFIG.event;
-    var txt = "Confirmo asistencia a la premiere de SWIPE RIGHT.\n"+
-      "Nombre: "+(guest.name||"")+"\n"+
-      "Correo: "+(guest.email||"")+"\n"+
-      "Evento: "+[val(e.date),val(e.time),val(e.venue),val(e.city)].filter(Boolean).join(" · ");
+    var txt = "I'm confirming my attendance at the SWIPE RIGHT premiere.\n"+
+      "Name: "+(guest.name||"")+"\n"+
+      "Email: "+(guest.email||"")+"\n"+
+      "Event: "+[val(e.date),val(e.time),val(e.venue),val(e.city)].filter(Boolean).join(" · ");
     var btn = $("#copy-btn");
-    function ok(){ btn.textContent="✅ Copiado"; setTimeout(function(){ btn.innerHTML="📋 Copiar mis datos"; }, 1800); }
+    function ok(){ btn.textContent="✅ Copied"; setTimeout(function(){ btn.innerHTML="📋 Copy my details"; }, 1800); }
     if(navigator.clipboard && navigator.clipboard.writeText){
       navigator.clipboard.writeText(txt).then(ok).catch(function(){ legacyCopy(txt, ok); });
     } else { legacyCopy(txt, ok); }
@@ -845,7 +845,7 @@ a.btn{display:block;text-align:center;text-decoration:none}
     try{
       var ta=document.createElement("textarea"); ta.value=txt; ta.style.position="fixed"; ta.style.opacity="0";
       document.body.appendChild(ta); ta.select(); document.execCommand("copy"); document.body.removeChild(ta); ok();
-    }catch(_){ toast("Copia manual: "+txt.slice(0,40)+"…"); }
+    }catch(_){ toast("Copy manually: "+txt.slice(0,40)+"…"); }
   }
 
   function escapeHtml(s){
