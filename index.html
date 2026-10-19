@@ -292,26 +292,43 @@ button{font-family:inherit}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 
 /* ---------- MATCH ---------- */
-#match{align-items:center;justify-content:center;text-align:center;padding:40px 30px;
-  background:
-    radial-gradient(120% 70% at 50% 0%, rgba(253,38,122,.5), transparent 60%),
-    radial-gradient(120% 70% at 50% 100%, rgba(255,122,69,.4), transparent 60%),
-    var(--app);}
-#match .ismatch{font-family:"Poppins",sans-serif;font-weight:800;font-size:40px;line-height:1;
-  background:var(--flame);-webkit-background-clip:text;background-clip:text;color:transparent;
-  font-style:italic;letter-spacing:-.01em}
-#match .msub{margin:16px 0 0;color:var(--fg);font-size:16px;max-width:28ch;line-height:1.45;opacity:.92}
-.match-avatars{display:flex;align-items:center;justify-content:center;margin:34px 0 6px}
-.match-avatars .a{width:118px;height:118px;border-radius:50%;overflow:hidden;background:var(--surface-2);
-  box-shadow:0 0 0 4px var(--app), 0 0 0 6px rgba(255,255,255,.14);display:grid;place-items:center}
+@font-face{font-family:"The Smile";src:url("fonts/the-smile.otf") format("opentype");font-display:swap}
+#match{align-items:center;text-align:center;padding:0 24px 28px;overflow:hidden;
+  background:linear-gradient(165deg,#ffc24b 0%,#ff9a3d 26%,#ff5864 60%,#fd267a 100%);
+  background-size:100% 170%;animation:bgshift 7s ease-in-out infinite alternate}
+@keyframes bgshift{from{background-position:50% 0}to{background-position:50% 100%}}
+#match .mwrap{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;position:relative;z-index:2}
+.mtitle{display:flex;flex-direction:column;align-items:center;color:#fff;text-shadow:0 6px 26px rgba(150,10,60,.35)}
+.mtitle .its{font-family:"Poppins",sans-serif;font-weight:800;font-style:italic;font-size:44px;line-height:1;letter-spacing:.03em;
+  animation:drop .6s cubic-bezier(.2,1.4,.4,1) both .05s}
+.mtitle .script{font-family:"The Smile","Brush Script MT",cursive;font-size:min(31vw,128px);line-height:1.05;margin-top:-4px;
+  animation:pop .8s cubic-bezier(.2,1.5,.4,1) both .25s}
+.match-avatars{display:flex;align-items:center;justify-content:center;margin-top:22px}
+.match-avatars .a{width:min(40vw,160px);height:min(40vw,160px);border-radius:50%;overflow:hidden;flex:0 0 auto;
+  display:grid;place-items:center;background:#2a2f42;font-size:56px;
+  box-shadow:0 0 0 5px #fff, 0 20px 44px -14px rgba(120,10,50,.6)}
 .match-avatars .a img{width:100%;height:100%;object-fit:cover}
-.match-avatars .a.sr{background:var(--flame)}
-.match-avatars .a.sr span{font-family:"Poppins",sans-serif;font-weight:800;font-size:15px;color:#fff;letter-spacing:.04em;line-height:1.05;padding:8px}
-.match-avatars .a:last-child{margin-left:-26px}
-.match-avatars .heart{position:relative;z-index:3;width:50px;height:50px;border-radius:50%;background:#fff;
-  display:grid;place-items:center;font-size:24px;margin:0 -16px;box-shadow:0 8px 20px -6px rgba(0,0,0,.5)}
-#match .foot{margin-top:auto;padding-top:30px;width:100%}
+.match-avatars .a.you{animation:inL .75s cubic-bezier(.2,1.2,.4,1) both .5s}
+.match-avatars .a.sr{background:#161925;animation:inR .75s cubic-bezier(.2,1.2,.4,1) both .5s}
+.match-avatars .a.sr span{font-family:"Poppins",sans-serif;font-weight:800;font-size:24px;line-height:1;letter-spacing:.02em;
+  background:var(--flame);-webkit-background-clip:text;background-clip:text;color:transparent}
+.match-avatars .heart{position:relative;z-index:3;width:84px;height:auto;margin:0 -26px;flex:0 0 auto;
+  filter:drop-shadow(0 10px 18px rgba(120,10,50,.5));
+  animation:heartIn .6s cubic-bezier(.2,1.7,.4,1) both 1s, beat 1.5s ease-in-out infinite 1.8s}
+#match .msub{margin:26px 0 0;color:#fff;font-size:17px;max-width:28ch;line-height:1.45;animation:fadeUp .6s ease both 1.2s}
+#match .foot{width:100%;position:relative;z-index:2;animation:fadeUp .6s ease both 1.45s}
+#match .btn{background:#fff;color:var(--flame-3);box-shadow:0 14px 34px -12px rgba(120,10,50,.6)}
 #match .ph-name{font-weight:700}
+.burst{position:absolute;inset:0;pointer-events:none;z-index:1;overflow:hidden}
+.burst i{position:absolute;bottom:-50px;font-style:normal;color:#fff;animation:floatUp linear infinite}
+@keyframes drop{from{opacity:0;transform:translateY(-40px)}to{opacity:1;transform:none}}
+@keyframes pop{0%{opacity:0;transform:scale(.3) rotate(-8deg)}100%{opacity:1;transform:none}}
+@keyframes inL{from{opacity:0;transform:translateX(-130%) rotate(-14deg)}to{opacity:1;transform:none}}
+@keyframes inR{from{opacity:0;transform:translateX(130%) rotate(14deg)}to{opacity:1;transform:none}}
+@keyframes heartIn{from{opacity:0;transform:scale(0) rotate(-25deg)}to{opacity:1;transform:none}}
+@keyframes beat{0%,100%{transform:scale(1)}14%{transform:scale(1.15)}28%{transform:scale(1)}42%{transform:scale(1.08)}56%{transform:scale(1)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes floatUp{0%{transform:translateY(0) rotate(0);opacity:0}10%{opacity:var(--o,.7)}100%{transform:translateY(-1050px) rotate(40deg);opacity:0}}
 
 /* ---------- DETAILS ---------- */
 #details{padding:0 24px 24px}
@@ -361,7 +378,8 @@ a.btn{display:block;text-align:center;text-decoration:none}
   .phone{max-width:none;max-height:none;border-radius:0;height:100%;box-shadow:none}
 }
 @media (prefers-reduced-motion:reduce){
-  *{transition-duration:.001ms !important}
+  *{transition-duration:.001ms !important;animation-duration:.001ms !important;animation-iteration-count:1 !important;animation-delay:0s !important}
+  .burst{display:none}
 }
 </style>
 </head>
@@ -473,12 +491,15 @@ a.btn{display:block;text-align:center;text-decoration:none}
 
   <!-- ============ MATCH ============ -->
   <section class="screen" id="match">
-    <div class="ismatch">It's a match!</div>
-    <p class="msub"><b>SWIPE RIGHT</b> likes you too, <span class="ph-name" id="match-name">superstar</span>.</p>
-    <div class="match-avatars">
-      <span class="a" id="match-you"><span class="ph" style="font-size:40px;opacity:.5">👤</span></span>
-      <span class="heart">❤️</span>
-      <span class="a sr"><span>SWIPE<br>RIGHT</span></span>
+    <div class="burst" id="burst"></div>
+    <div class="mwrap">
+      <div class="mtitle"><span class="its">IT'S A</span><span class="script">Match!</span></div>
+      <div class="match-avatars">
+        <span class="a you" id="match-you">👤</span>
+        <img class="heart" src="icon.png" alt="">
+        <span class="a sr" id="match-sr"><span>SWIPE<br>RIGHT</span></span>
+      </div>
+      <p class="msub"><b>SWIPE RIGHT</b> likes you too, <span class="ph-name" id="match-name">superstar</span>.</p>
     </div>
     <div class="foot">
       <button class="btn" id="go-details">See the premiere details</button>
@@ -864,7 +885,20 @@ a.btn{display:block;text-align:center;text-decoration:none}
     // fill match screen avatars
     var you = $("#match-you");
     if(guest.photo){ you.innerHTML = '<img src="'+guest.photo+'" alt="">'; }
-    $("#match-name").textContent = guest.name || "crack";
+    $("#match-name").textContent = (guest.name || "").split(" ")[0] || "superstar";
+    var art = CONFIG.profile.photos[0];
+    if(art && art.img){ $("#match-sr").innerHTML = '<img src="'+art.img+'" alt="">'; }
+    var burst = $("#burst"); burst.innerHTML = "";
+    for(var i=0;i<18;i++){
+      var h = document.createElement("i");
+      h.textContent = i%3 ? "♥" : "✦";
+      h.style.left = (Math.random()*96)+"%";
+      h.style.fontSize = (12+Math.random()*22)+"px";
+      h.style.setProperty("--o", (.35+Math.random()*.5).toFixed(2));
+      h.style.animationDuration = (5+Math.random()*5)+"s";
+      h.style.animationDelay = (Math.random()*5)+"s";
+      burst.appendChild(h);
+    }
     setTimeout(function(){ show("match"); }, 480);
   }
 
