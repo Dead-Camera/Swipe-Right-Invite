@@ -136,6 +136,10 @@ button{font-family:inherit}
 #splash .cta-wrap{width:100%;margin-top:34px}
 #splash .teaser{display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:22px}
 #splash .teaser span{background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:8px 15px;font-size:14px;font-weight:600;color:var(--fg)}
+.studio{display:flex;flex-direction:column;align-items:center;gap:9px}
+.studio .lbl{font-family:"Poppins",sans-serif;font-weight:600;font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+.studio img{height:32px;width:auto}
+.slogan{width:150px;height:auto;margin:26px auto 0;opacity:.92}
 #splash .by{margin-top:18px;font-size:12px;letter-spacing:.04em}
 
 /* ---------- CREATE PROFILE ---------- */
@@ -342,7 +346,7 @@ a.btn{display:block;text-align:center;text-decoration:none}
     </div>
     <div class="foot" style="padding:0 30px 34px">
       <button class="btn" id="go-create">Create my profile</button>
-      <div class="by muted" style="text-align:center">Dead Camera Studios · Digital invitation</div>
+      <div class="studio" style="margin-top:22px"><span class="lbl">An original series from</span><img src="deadcamera.png" alt="Dead Camera Studios"></div>
     </div>
   </section>
 
@@ -490,6 +494,8 @@ a.btn{display:block;text-align:center;text-decoration:none}
         <div class="detail" id="done-detail"></div>
       </div>
       <button class="copybtn" id="copy-btn">📋 Copy my details</button>
+      <img class="slogan" src="slogan.png" alt="Lights, camera, vision, action.">
+      <div class="studio" style="margin-top:18px"><span class="lbl">An original series from</span><img src="deadcamera.png" alt="Dead Camera Studios"></div>
     </div>
     <div class="foot">
       <div class="btn-row" id="done-cta"></div>
@@ -536,7 +542,7 @@ a.btn{display:block;text-align:center;text-decoration:none}
       chip: "S1",
       location: "Dec 5 · CC El Tesoro, Medellín",
       bio: "Crime, toxic love and a getaway from Ohio to Tokyo to Colombia. All of season 1 on the big screen, for one night only. Swipe right if you dare to join us.",
-      interests: ["Premiere", "Giant screen", "Crime & romance", "100% AI", "Dead Camera Studios"],
+      interests: ["Premiere", "Giant screen", "Crime & romance", "100% AI"],
       // Slots de key art (placeholder). Reemplaza cada uno por una imagen cuando quieras.
       photos: [
         { label: "Key art 01", grad: "linear-gradient(145deg,#ff5864,#fd267a)" },
