@@ -258,9 +258,6 @@ button{font-family:inherit}
 #pane-matches,#pane-messages,#pane-profile{overflow-y:auto;padding:4px 20px 18px}
 .pane h3{font-family:"Poppins",sans-serif;font-weight:800;font-size:20px;margin:6px 0 0}
 .pane .sub{color:var(--muted);font-size:14px;line-height:1.5;margin:6px 0 0}
-.empty{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:6px;padding:24px}
-.empty .big{font-size:46px}
-.empty .btn{margin-top:18px;max-width:280px}
 .lock{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:6px}
 .lock .big{font-size:44px;margin-bottom:6px}
 .lock .btn{margin-top:18px;max-width:260px}
@@ -276,13 +273,31 @@ button{font-family:inherit}
 .bub{max-width:82%;padding:10px 14px;border-radius:18px;font-size:14.5px;line-height:1.45;background:var(--surface-2);align-self:flex-start;border-bottom-left-radius:6px}
 .bub.me{align-self:flex-end;background:var(--flame);color:#fff;border-bottom-left-radius:18px;border-bottom-right-radius:6px}
 .chat .btn{margin-top:8px}
-.prof{display:flex;flex-direction:column;align-items:center;text-align:center;margin-top:18px}
-.prof .av{width:120px;height:120px;border-radius:50%;overflow:hidden;background:var(--surface-2);display:grid;place-items:center;font-size:44px;box-shadow:0 0 0 3px rgba(255,255,255,.06)}
-.prof .av img{width:100%;height:100%;object-fit:cover}
-.prof .nm{font-family:"Poppins",sans-serif;font-weight:800;font-size:22px;margin-top:14px}
-.prof .em{color:var(--muted);font-size:14px;margin-top:4px;word-break:break-all}
-.prof .st{margin-top:14px;font-family:"Poppins",sans-serif;font-weight:600;font-size:12.5px;padding:7px 13px;border-radius:999px;background:var(--surface-2)}
-.prof .btn{margin-top:22px;max-width:260px}
+.me{padding-bottom:10px}
+.me .vcard{margin:6px 0 0}
+.me .mephoto{position:relative;aspect-ratio:1/0.92;background:linear-gradient(150deg,#ff5864,#7b2ff7);display:block;cursor:pointer;overflow:hidden}
+.me .mephoto img{width:100%;height:100%;object-fit:cover;object-position:50% 28%}
+.me .mephoto .ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:#fff;font-family:"Poppins",sans-serif;font-weight:800;font-size:64px}
+.me .mephoto .ph small{font-size:12px;font-weight:700;letter-spacing:.06em;background:rgba(0,0,0,.25);padding:7px 13px;border-radius:999px}
+.me .mephoto .cam{position:absolute;right:14px;top:14px;width:40px;height:40px;border-radius:50%;background:rgba(10,12,20,.6);display:grid;place-items:center;font-size:18px}
+.me .vbio.nobio{color:var(--dim);font-style:italic}
+.me .st{display:inline-block;margin-top:14px;font-family:"Poppins",sans-serif;font-weight:600;font-size:12.5px;padding:7px 13px;border-radius:999px;background:rgba(0,0,0,.25)}
+.me .row2{display:flex;gap:10px;margin-top:14px}
+.me .row2 .btn{flex:1;padding:14px 10px;font-size:15px}
+.me .priv{margin-top:16px;padding:14px 16px;border-radius:16px;background:var(--surface);border:1px solid var(--line);font-size:13.5px;color:var(--muted);line-height:1.6;word-break:break-all}
+.me .priv b{display:block;font-family:"Poppins",sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:4px}
+.me .reset{display:block;margin:16px auto 0;background:none;border:0;color:var(--dim);font-size:12.5px;text-decoration:underline;cursor:pointer;font-family:inherit}
+.edit{margin-top:6px}
+.edit h3{margin:0 0 4px}
+.edit label.lab{display:block;font-family:"Poppins",sans-serif;font-weight:600;font-size:13px;margin:18px 0 8px}
+.edit textarea{width:100%;min-height:76px;resize:none;background:var(--surface-2);border:1.5px solid transparent;border-radius:14px;padding:13px 14px;color:var(--fg);font:inherit;font-size:15.5px;outline:none}
+.edit textarea:focus{border-color:var(--flame-2)}
+.edit .cnt{font-size:12px;color:var(--dim);text-align:right;margin-top:4px}
+.edit .tags{display:flex;flex-wrap:wrap;gap:8px}
+.edit .tag{border:1.5px solid var(--line);background:transparent;color:var(--fg);border-radius:999px;padding:8px 13px;font:600 13px "Poppins",sans-serif;cursor:pointer}
+.edit .tag.on{background:#f45a52;border-color:#f45a52;color:#fff}
+.edit .row2{display:flex;gap:10px;margin-top:22px}
+.edit .row2 .btn{flex:1}
 
 /* toast */
 .toast{position:absolute;left:50%;bottom:92px;transform:translate(-50%,16px);z-index:30;
@@ -551,6 +566,7 @@ a.btn{display:block;text-align:center;text-decoration:none}
     <div class="pane" id="pane-matches"></div>
     <div class="pane" id="pane-messages"></div>
     <div class="pane" id="pane-profile"></div>
+    <input type="file" id="photo-input-2" accept="image/*" hidden>
 
     <nav class="nav">
       <a href="#" class="on" data-tab="discover"><span class="ic">🧭</span><span data-t="n_discover"></span></a>
@@ -735,6 +751,12 @@ a.btn{display:block;text-align:center;text-decoration:none}
       ms_post: "It's a date. Here's everything you need 🎬",
       pr_ok: "● Confirmed for the premiere", pr_pending: "● Pending: swipe right to confirm",
       pr_ticket: "See my ticket", pr_edit: "Edit profile",
+      pr_addphoto: "📷 Add your photo", pr_nobio: "Tell SWIPE RIGHT something about you…",
+      pr_private: "Only you can see this", pr_reset: "Not you? Start over",
+      pr_reset_q: "This will erase your profile from this phone. Your RSVP stays saved. Continue?",
+      ed_title: "Edit your profile", ed_bio: "About you", ed_bio_ph: "e.g. Popcorn first, questions later.",
+      ed_tags: "Your interests (up to 5)", ed_save: "Save", ed_cancel: "Cancel", ed_max: "Up to 5 interests 😉",
+      saved: "Profile saved ✅",
       // 4. Match
       m_its: "IT'S A", m_match: "Match!",
       m_sub: "See you at the premiere.",
@@ -807,6 +829,12 @@ a.btn{display:block;text-align:center;text-decoration:none}
       ms_post: "Es una cita. Aquí tienes todo lo que necesitas 🎬",
       pr_ok: "● Confirmado para el estreno", pr_pending: "● Pendiente: desliza a la derecha para confirmar",
       pr_ticket: "Ver mi ticket", pr_edit: "Editar perfil",
+      pr_addphoto: "📷 Agrega tu foto", pr_nobio: "Cuéntale algo de ti a SWIPE RIGHT…",
+      pr_private: "Solo tú ves esto", pr_reset: "¿No eres tú? Empezar de nuevo",
+      pr_reset_q: "Esto borra tu perfil de este celular. Tu confirmación sigue guardada. ¿Continuar?",
+      ed_title: "Edita tu perfil", ed_bio: "Sobre ti", ed_bio_ph: "Ej: Primero las crispetas, después las preguntas.",
+      ed_tags: "Tus gustos (hasta 5)", ed_save: "Guardar", ed_cancel: "Cancelar", ed_max: "Máximo 5 gustos 😉",
+      saved: "Perfil guardado ✅",
       m_its: "¡ES UN", m_match: "Match!",
       m_sub: "Ahora sí, nos vemos en el estreno.",
       see_plan: "Ver el plan",
@@ -837,6 +865,15 @@ a.btn{display:block;text-align:center;text-decoration:none}
     }
   };
 
+  var INTERESTS = {
+    movies:["Movies","Cine"], series:["Series","Series"], music:["Music","Música"], concerts:["Concerts","Conciertos"],
+    travel:["Travel","Viajar"], food:["Food","Comida"], parties:["Parties","Fiestas"], art:["Art","Arte"],
+    sports:["Sports","Deporte"], cars:["Cars","Carros"], cats:["Cats","Gatos"], dogs:["Dogs","Perros"],
+    adrenaline:["Adrenaline","Adrenalina"], thrillers:["Thrillers","Thrillers"], romance:["Romance","Romance"],
+    coffee:["Coffee","Café"], nightdrives:["Night drives","Manejar de noche"], fashion:["Fashion","Moda"]
+  };
+  function tagName(id){ return INTERESTS[id] ? INTERESTS[id][lang==="es"?1:0] : id; }
+
   /* ---------- language ---------- */
   var lang = "en";
   try{ lang = localStorage.getItem("sr-lang") || ""; }catch(_){ lang = ""; }
@@ -844,7 +881,35 @@ a.btn{display:block;text-align:center;text-decoration:none}
   function t(k){ return L[lang][k]; }
 
   /* ---------- state ---------- */
-  var guest = { name: "", email: "", phone: "", photo: null };
+  var guest = { name: "", email: "", phone: "", photo: null, bio: "", tags: [] };
+  var editing = false;
+
+  /* The guest's profile is remembered on their own phone (browser storage),
+     so reopening the link shows their profile and ticket again. */
+  var STORE = "sr-guest";
+  function saveGuest(){
+    try{ localStorage.setItem(STORE, JSON.stringify({ g: guest, accepted: accepted })); }catch(_){}
+  }
+  function loadGuest(){
+    try{ var d = JSON.parse(localStorage.getItem(STORE) || "null"); return d && d.g && d.g.name ? d : null; }catch(_){ return null; }
+  }
+
+  /* Shrink a picked photo so it fits in browser storage. */
+  function readPhoto(file, done){
+    var reader = new FileReader();
+    reader.onload = function(ev){
+      var img = new Image();
+      img.onload = function(){
+        var max = 720, sc = Math.min(1, max / Math.max(img.width, img.height));
+        var c = document.createElement("canvas"); c.width = Math.round(img.width*sc); c.height = Math.round(img.height*sc);
+        c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+        try{ done(c.toDataURL("image/jpeg", .82)); }catch(_){ done(ev.target.result); }
+      };
+      img.onerror = function(){ done(ev.target.result); };
+      img.src = ev.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
   var photoIndex = 0;
   var accepted = false;
   var tab = "discover";
@@ -938,16 +1003,23 @@ a.btn{display:block;text-align:center;text-decoration:none}
   photoInput.addEventListener("change", function(){
     var f = photoInput.files && photoInput.files[0];
     if(!f) return;
-    var reader = new FileReader();
-    reader.onload = function(ev){
-      guest.photo = ev.target.result;
-      var img = $("#avatar-img"); img.src = guest.photo; img.hidden = false;
-      $("#avatar-ph").hidden = true;
-    };
-    reader.readAsDataURL(f);
+    readPhoto(f, function(url){ guest.photo = url; showAvatar(); });
+  });
+  function showAvatar(){
+    if(!guest.photo) return;
+    var img = $("#avatar-img"); img.src = guest.photo; img.hidden = false;
+    $("#avatar-ph").hidden = true;
+  }
+  $("#photo-input-2").addEventListener("change", function(){
+    var f = this.files && this.files[0];
+    if(!f) return;
+    readPhoto(f, function(url){
+      guest.photo = url; showAvatar(); saveGuest(); renderTab();
+      if(accepted){ $("#match-you").innerHTML = '<img src="'+url+'" alt="">'; buildDone(); }
+    });
   });
 
-  goDiscover.addEventListener("click", function(){ tab = "discover"; renderTab(); show("discover"); });
+  goDiscover.addEventListener("click", function(){ saveGuest(); tab = "discover"; renderTab(); show("discover"); });
 
   /* ============================================================
      3. CARD — key art slides
@@ -1067,14 +1139,39 @@ a.btn{display:block;text-align:center;text-decoration:none}
       $("#pane-messages").innerHTML = h + '</div>';
     }
     if(tab==="profile"){
-      $("#pane-profile").innerHTML = '<div class="prof"><div class="av">'+avatarHtml()+'</div>'+
-        '<div class="nm">'+esc(guest.name)+'</div><div class="em">'+esc(guest.email)+'<br>'+esc(guest.phone)+'</div>'+
-        (accepted
-          ? '<div class="st" style="color:var(--like-2)">'+esc(t("pr_ok"))+'</div><button class="btn" data-goto="done">'+esc(t("pr_ticket"))+'</button>'
-          : '<div class="st" style="color:var(--star-1)">'+esc(t("pr_pending"))+'</div><button class="btn ghost" data-goto="create">'+esc(t("pr_edit"))+'</button>')+
-        '</div>';
+      var pp = $("#pane-profile");
+      if(editing){
+        var tg = Object.keys(INTERESTS).map(function(id){
+          return '<button class="tag'+(guest.tags.indexOf(id)>=0?' on':'')+'" data-tag="'+id+'">'+esc(tagName(id))+'</button>';
+        }).join("");
+        pp.innerHTML = '<div class="edit"><h3>'+esc(t("ed_title"))+'</h3>'+
+          '<label class="lab" for="bio-input">'+esc(t("ed_bio"))+'</label>'+
+          '<textarea id="bio-input" maxlength="90" placeholder="'+esc(t("ed_bio_ph"))+'">'+esc(guest.bio)+'</textarea>'+
+          '<div class="cnt"><span id="bio-cnt">'+guest.bio.length+'</span>/90</div>'+
+          '<label class="lab">'+esc(t("ed_tags"))+'</label><div class="tags">'+tg+'</div>'+
+          '<div class="row2"><button class="btn ghost" data-act="cancel">'+esc(t("ed_cancel"))+'</button>'+
+          '<button class="btn" data-act="save">'+esc(t("ed_save"))+'</button></div></div>';
+        $("#bio-input").addEventListener("input", function(){ $("#bio-cnt").textContent = this.value.length; });
+      } else {
+        pp.innerHTML = '<div class="me"><div class="vcard">'+
+          '<label class="mephoto" for="photo-input-2">'+
+            (guest.photo ? '<img src="'+guest.photo+'" alt="">' : '<span class="ph">'+esc((guest.name||"?").charAt(0).toUpperCase())+'<small>'+esc(t("pr_addphoto"))+'</small></span>')+
+            '<span class="cam">📷</span></label>'+
+          '<div class="vinfo">'+
+            '<div class="vn"><b>'+esc(guest.name)+'</b></div>'+
+            '<div class="vbio'+(guest.bio?'':' nobio')+'">'+esc(guest.bio || t("pr_nobio"))+'</div>'+
+            (guest.tags.length ? '<div class="pills">'+guest.tags.map(function(id){ return '<span class="pill">'+esc(tagName(id))+'</span>'; }).join("")+'</div>' : '')+
+            '<div class="st" style="color:'+(accepted?'var(--like-1)':'var(--star-1)')+'">'+esc(t(accepted?"pr_ok":"pr_pending"))+'</div>'+
+          '</div></div>'+
+          '<div class="row2"><button class="btn ghost" data-act="edit">'+esc(t("pr_edit"))+'</button>'+
+            (accepted ? '<button class="btn" data-goto="done">'+esc(t("pr_ticket"))+'</button>'
+                      : '<button class="btn" data-tab="discover">'+esc(t("ms_reply"))+'</button>')+'</div>'+
+          '<div class="priv"><b>'+esc(t("pr_private"))+'</b>'+esc(guest.email)+'<br>'+esc(guest.phone)+'</div>'+
+          '<button class="reset" data-act="reset">'+esc(t("pr_reset"))+'</button></div>';
+      }
     }
   }
+
   /* ---------- character profile viewer (photo carousel) ---------- */
   var vChar = null, vIdx = 0;
   function openChar(id){
@@ -1122,6 +1219,30 @@ a.btn{display:block;text-align:center;text-decoration:none}
     ph.addEventListener("pointercancel", function(){ sx = null; });
   })();
 
+  $("#pane-profile").addEventListener("click", function(ev){
+    var tg = ev.target.closest("[data-tag]");
+    if(tg){
+      var id = tg.getAttribute("data-tag"), on = tg.classList.contains("on");
+      var n = $$("#pane-profile .tag.on").length;
+      if(!on && n >= 5){ toast(t("ed_max")); return; }
+      tg.classList.toggle("on");
+      return;
+    }
+    var b = ev.target.closest("[data-act]"); if(!b) return;
+    var act = b.getAttribute("data-act");
+    if(act==="edit"){ editing = true; renderTab(); }
+    if(act==="cancel"){ editing = false; renderTab(); }
+    if(act==="save"){
+      guest.bio = $("#bio-input").value.trim();
+      guest.tags = $$("#pane-profile .tag.on").map(function(x){ return x.getAttribute("data-tag"); });
+      editing = false; saveGuest(); renderTab(); toast(t("saved"));
+    }
+    if(act==="reset" && window.confirm(t("pr_reset_q"))){
+      try{ localStorage.removeItem(STORE); }catch(_){}
+      location.reload();
+    }
+  });
+
   $("#discover").addEventListener("click", function(ev){
     var ch = ev.target.closest("[data-char]");
     if(ch){ openChar(ch.getAttribute("data-char")); return; }
@@ -1134,10 +1255,17 @@ a.btn{display:block;text-align:center;text-decoration:none}
   /* ============================================================
      4. MATCH
      ============================================================ */
+  /* Matched state of the UI (also used when a returning guest reopens the link). */
+  function markMatched(){
+    $("#discover .actions").style.visibility = "hidden";
+    card.classList.remove("fly"); card.style.transform = ""; card.style.opacity = "";
+    $("#stamp-like").style.opacity = 0;
+    var mt = $("#card .minitag"); mt.setAttribute("data-t", "c_matched"); mt.textContent = t("c_matched");
+  }
   function accept(){
     if(accepted) return;
     accepted = true;
-    submitRSVP();
+    submitRSVP(); saveGuest();
     $("#discover .actions").style.visibility = "hidden";
     if(guest.photo){ $("#match-you").innerHTML = '<img src="'+guest.photo+'" alt="">'; }
     var art = CONFIG.photos[0];
@@ -1156,10 +1284,7 @@ a.btn{display:block;text-align:center;text-decoration:none}
     renderTab(); buildDone();
     setTimeout(function(){
       show("match");
-      // put the card back (matched, no longer swipeable) for when the guest returns to Discover
-      card.classList.remove("fly"); card.style.transform = ""; card.style.opacity = "";
-      $("#stamp-like").style.opacity = 0;
-      var mt = $("#card .minitag"); mt.setAttribute("data-t", "c_matched"); mt.textContent = t("c_matched");
+      markMatched(); // card waits, matched, for when the guest returns to Discover
     }, 480);
   }
   $("#go-details").addEventListener("click", function(){ show("details"); });
@@ -1231,6 +1356,23 @@ a.btn{display:block;text-align:center;text-decoration:none}
   }
 
   applyLang();
+
+  /* Returning guest on the same phone: restore their profile (and ticket, if they already accepted). */
+  (function(){
+    var d = loadGuest(); if(!d) return;
+    var g = d.g;
+    guest.name = g.name||""; guest.email = g.email||""; guest.phone = g.phone||"";
+    guest.photo = g.photo||null; guest.bio = g.bio||""; guest.tags = g.tags||[];
+    nameInput.value = guest.name; emailInput.value = guest.email; phoneInput.value = guest.phone;
+    checkCreate(); showAvatar();
+    if(d.accepted){
+      accepted = true; rsvp = "sent";
+      if(guest.photo){ $("#match-you").innerHTML = '<img src="'+guest.photo+'" alt="">'; }
+      markMatched(); renderTab(); buildDone(); show("done");
+    } else {
+      tab = "discover"; renderTab(); show("discover");
+    }
+  })();
 })();
 </script>
 </body>
