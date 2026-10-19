@@ -195,6 +195,7 @@ button{font-family:inherit}
 .photo.show{opacity:1}
 .photo .art{position:absolute;inset:0}
 .ka{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:14px;text-align:center;padding:30px 30px 30px}
+.ka .srlogo{width:74%;max-width:290px;height:auto;filter:drop-shadow(0 6px 22px rgba(0,0,0,.3))}
 .ka .srword{font-family:"Poppins",sans-serif;font-weight:800;font-size:34px;line-height:.98;letter-spacing:-.02em;color:#fff;text-shadow:0 6px 24px rgba(0,0,0,.45)}
 .ka .srword small{display:block;font-size:13px;font-weight:600;letter-spacing:.42em;margin-top:8px;opacity:.9}
 .ka .slot{font-family:"Poppins",sans-serif;font-weight:700;font-size:10.5px;letter-spacing:.28em;text-transform:uppercase;
@@ -255,6 +256,7 @@ button{font-family:inherit}
 #pane-matches,#pane-messages,#pane-profile{overflow-y:auto;padding:4px 20px 18px}
 .pane h3{font-family:"Poppins",sans-serif;font-weight:800;font-size:20px;margin:6px 0 0}
 .pane .sub{color:var(--muted);font-size:14px;line-height:1.5;margin:6px 0 0}
+#deck-empty{visibility:hidden}
 .empty{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:6px;padding:24px}
 .empty .big{font-size:46px}
 .empty .btn{margin-top:18px;max-width:280px}
@@ -304,8 +306,9 @@ button{font-family:inherit}
 .match-avatars{display:flex;align-items:center;justify-content:center;margin-top:22px}
 .match-avatars .a{width:min(40vw,160px);height:min(40vw,160px);border-radius:50%;overflow:hidden;flex:0 0 auto;
   display:grid;place-items:center;background:#2a2f42;font-size:56px;
-  box-shadow:0 0 0 5px #fff, 0 20px 44px -14px rgba(120,10,50,.6)}
+  box-shadow:0 20px 44px -14px rgba(120,10,50,.6)}
 .match-avatars .a img{width:100%;height:100%;object-fit:cover}
+.match-avatars .a img.srl{width:68%;height:auto;object-fit:contain}
 .match-avatars .a.you{animation:inL .75s cubic-bezier(.2,1.2,.4,1) both .5s}
 .match-avatars .a.sr{background:#161925;animation:inR .75s cubic-bezier(.2,1.2,.4,1) both .5s}
 .match-avatars .a.sr span{font-family:"Poppins",sans-serif;font-weight:800;font-size:24px;line-height:1;letter-spacing:.02em;
@@ -504,7 +507,7 @@ a.btn{display:block;text-align:center;text-decoration:none}
       <div class="match-avatars">
         <span class="a you" id="match-you">👤</span>
         <img class="heart" src="icon.png" alt="">
-        <span class="a sr" id="match-sr"><span>SWIPE<br>RIGHT</span></span>
+        <span class="a sr" id="match-sr"><img class="srl" src="sr-logo.png" alt="SWIPE RIGHT"></span>
       </div>
       <p class="msub"><b>SWIPE RIGHT</b> likes you too, <span class="ph-name" id="match-name">superstar</span>.</p>
     </div>
@@ -734,7 +737,7 @@ a.btn{display:block;text-align:center;text-decoration:none}
         el.innerHTML =
           '<div class="art" style="background:'+ph.grad+'"></div>'+
           '<div class="ka">'+
-            '<div class="srword">SWIPE<br>RIGHT<small>SERIES · AI</small></div>'+
+            '<img class="srlogo" src="sr-logo-white.png" alt="SWIPE RIGHT">'+
           '</div>'+
           '<div class="scrim"></div>';
       }
@@ -889,6 +892,7 @@ a.btn{display:block;text-align:center;text-decoration:none}
     accepted = true;
     submitRSVP();
     $("#discover .actions").style.visibility = "hidden";
+    $("#deck-empty").style.visibility = "visible";
     // fill match screen avatars
     var you = $("#match-you");
     if(guest.photo){ you.innerHTML = '<img src="'+guest.photo+'" alt="">'; }
