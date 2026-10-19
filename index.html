@@ -761,7 +761,7 @@ a.btn{display:block;text-align:center;text-decoration:none}
       t_where: "Where", t_where_v: "Cinemark · El Tesoro Mall · Theater 9 · Carrera 25A # 1A Sur – 45, Medellín",
       t_name: "Name",
       t_final: "Don't stand us up.",
-      t_copy: "📋 Copy my details", t_copied: "✅ Copied", t_done: "Done",
+      t_copy: "📋 Copy my details", t_copied: "✅ Copied", t_done: "Done", t_cast: "💘 Back to my matches",
       t_bye: "See you at the premiere! 🎬",
       t_copytxt: "I'm confirming my attendance at the SWIPE RIGHT premiere.",
       t_phone: "Phone",
@@ -833,7 +833,7 @@ a.btn{display:block;text-align:center;text-decoration:none}
       t_where: "Dónde", t_where_v: "Cinemark CC El Tesoro · Sala 9 · Carrera 25A # 1A Sur – 45, Medellín",
       t_name: "Nombre",
       t_final: "No nos dejes plantados.",
-      t_copy: "📋 Copiar mis datos", t_copied: "✅ Copiado", t_done: "Listo",
+      t_copy: "📋 Copiar mis datos", t_copied: "✅ Copiado", t_done: "Listo", t_cast: "💘 Volver a mis matches",
       t_bye: "¡Nos vemos en el estreno! 🎬",
       t_copytxt: "Confirmo mi asistencia a la premiere de SWIPE RIGHT.",
       t_phone: "Celular",
@@ -1210,7 +1210,10 @@ a.btn{display:block;text-align:center;text-decoration:none}
       a.target="_blank"; a.rel="noopener"; a.textContent=t("t_cal");
       cta.appendChild(a);
     }
-    if(!cta.children.length){
+    var mc = document.createElement("button"); mc.className = "btn" + (cta.children.length ? " outline" : ""); mc.textContent = t("t_cast");
+    mc.addEventListener("click", function(){ tab = "matches"; renderTab(); show("discover"); });
+    cta.appendChild(mc);
+    if(cta.children.length === 1){
       var b = document.createElement("button"); b.className="btn ghost"; b.textContent=t("t_done");
       b.addEventListener("click", function(){ toast(t("t_bye")); });
       cta.appendChild(b);
