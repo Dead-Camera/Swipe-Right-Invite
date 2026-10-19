@@ -389,6 +389,9 @@ a.btn{display:block;text-align:center;text-decoration:none}
 .lang{position:absolute;top:18px;right:16px;z-index:40;display:flex;padding:3px;border:0;border-radius:999px;cursor:pointer;
   background:rgba(10,12,20,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 0 0 1px rgba(255,255,255,.1) inset}
 .lang span{font-family:"Poppins",sans-serif;font-weight:700;font-size:11.5px;letter-spacing:.06em;color:rgba(255,255,255,.6);padding:5px 9px;border-radius:999px;transition:background var(--d-fast),color var(--d-fast)}
+.lang span{display:flex;align-items:center;gap:5px}
+.lang .flag{width:17px;height:12px;border-radius:2px;display:block;box-shadow:0 0 0 1px rgba(0,0,0,.15)}
+.lang span:not(.on) .flag{opacity:.7}
 .lang span.on{background:#fff;color:#161925}
 .minitag{display:inline-flex;align-items:center;gap:6px;margin-bottom:10px;font-family:"Poppins",sans-serif;font-weight:700;font-size:11.5px;letter-spacing:.04em;
   background:rgba(63,196,99,.92);color:#fff;padding:6px 11px;border-radius:999px}
@@ -400,7 +403,7 @@ a.btn{display:block;text-align:center;text-decoration:none}
 <body>
 <div class="phone">
 
-  <button class="lang" id="lang" aria-label="Language / Idioma"><span data-l="en">EN</span><span data-l="es">ES</span></button>
+  <button class="lang" id="lang" aria-label="Language / Idioma"><span data-l="en"><svg class="flag" viewBox="0 0 19 13" aria-hidden="true"><rect width="19" height="13" fill="#b22234"/><path d="M0 1.5h19M0 3.5h19M0 5.5h19M0 7.5h19M0 9.5h19M0 11.5h19" stroke="#fff" stroke-width="1"/><rect width="8" height="7" fill="#3c3b6e"/><g fill="#fff"><circle cx="1.5" cy="1.4" r=".45"/><circle cx="4" cy="1.4" r=".45"/><circle cx="6.5" cy="1.4" r=".45"/><circle cx="2.75" cy="2.8" r=".45"/><circle cx="5.25" cy="2.8" r=".45"/><circle cx="1.5" cy="4.2" r=".45"/><circle cx="4" cy="4.2" r=".45"/><circle cx="6.5" cy="4.2" r=".45"/><circle cx="2.75" cy="5.6" r=".45"/><circle cx="5.25" cy="5.6" r=".45"/></g></svg>EN</span><span data-l="es"><svg class="flag" viewBox="0 0 18 12" aria-hidden="true"><rect width="18" height="6" fill="#fcd116"/><rect y="6" width="18" height="3" fill="#003893"/><rect y="9" width="18" height="3" fill="#ce1126"/></svg>ES</span></button>
 
   <!-- ============ 1. WELCOME ============ -->
   <section class="screen active" id="splash">
