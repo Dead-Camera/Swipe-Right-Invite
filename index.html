@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="Digital invitation to the SWIPE RIGHT theatrical premiere - Dead Camera Studios">
 <style>html,body{height:100%}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
-<title>Premiere SWIPE RIGHT</title>
+<title>SWIPE RIGHT Premiere</title>
+<link rel="icon" href="icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap">
@@ -89,6 +90,7 @@ button{font-family:inherit}
   font-family:"Poppins",sans-serif;font-weight:800;font-size:28px;letter-spacing:-.02em;
   display:inline-flex;align-items:center;gap:7px;line-height:1;
 }
+.logo .logoimg{height:1.15em;width:auto;display:block}
 .logo .mark{font-size:26px;filter:drop-shadow(0 2px 6px rgba(253,38,122,.5))}
 .logo .word{
   background:var(--flame);-webkit-background-clip:text;background-clip:text;color:transparent;
@@ -132,6 +134,8 @@ button{font-family:inherit}
 #splash p{margin:14px 0 0;max-width:30ch;color:var(--muted);font-size:15.5px;line-height:1.5}
 #splash .foot{margin-top:auto;padding-top:28px;width:100%}
 #splash .cta-wrap{width:100%;margin-top:34px}
+#splash .teaser{display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:22px}
+#splash .teaser span{background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:8px 15px;font-size:14px;font-weight:600;color:var(--fg)}
 #splash .by{margin-top:18px;font-size:12px;letter-spacing:.04em}
 
 /* ---------- CREATE PROFILE ---------- */
@@ -185,7 +189,7 @@ button{font-family:inherit}
   display:grid;place-items:center;}
 .photo.show{opacity:1}
 .photo .art{position:absolute;inset:0}
-.ka{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:30px}
+.ka{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:14px;text-align:center;padding:30px 30px 30px}
 .ka .srword{font-family:"Poppins",sans-serif;font-weight:800;font-size:34px;line-height:.98;letter-spacing:-.02em;color:#fff;text-shadow:0 6px 24px rgba(0,0,0,.45)}
 .ka .srword small{display:block;font-size:13px;font-weight:600;letter-spacing:.42em;margin-top:8px;opacity:.9}
 .ka .slot{font-family:"Poppins",sans-serif;font-weight:700;font-size:10.5px;letter-spacing:.28em;text-transform:uppercase;
@@ -272,6 +276,7 @@ button{font-family:inherit}
 /* ---------- DETAILS ---------- */
 #details{padding:4px 24px 24px}
 #details .scroll{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:16px;padding-bottom:6px}
+#details .scroll > *, #done .scroll > *, #create .body > *{flex-shrink:0}
 #details h2{font-family:"Poppins",sans-serif;font-weight:800;font-size:24px;margin:6px 0 0;text-wrap:balance}
 #details .lead{color:var(--muted);font-size:14.5px;margin:8px 0 2px;line-height:1.5}
 .ticket{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
@@ -330,9 +335,10 @@ a.btn{display:block;text-align:center;text-decoration:none}
       <span class="batt"><span></span></span>
     </div>
     <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center">
-      <div class="logo" style="font-size:42px"><span class="mark">🔥</span><span class="word">binder</span></div>
+      <div class="logo" style="font-size:42px"><img class="logoimg" src="logo.png" alt="binder"></div>
       <h1>You matched with the<br><span style="background:var(--flame);-webkit-background-clip:text;background-clip:text;color:transparent">SWIPE RIGHT</span> premiere</h1>
       <p>One night. One giant screen. All of season 1. Create your profile and swipe to accept your invitation.</p>
+      <div class="teaser" id="teaser"></div>
     </div>
     <div class="foot" style="padding:0 30px 34px">
       <button class="btn" id="go-create">Create my profile</button>
@@ -347,7 +353,7 @@ a.btn{display:block;text-align:center;text-decoration:none}
       <span class="batt"><span></span></span>
     </div>
     <div class="apphead"><button class="back" data-back="splash" aria-label="Back">‹</button>
-      <div class="logo" style="font-size:22px"><span class="mark">🔥</span><span class="word">binder</span></div>
+      <div class="logo" style="font-size:22px"><img class="logoimg" src="logo.png" alt="binder"></div>
     </div>
     <div class="body">
       <div>
@@ -389,7 +395,7 @@ a.btn{display:block;text-align:center;text-decoration:none}
       <span class="batt"><span></span></span>
     </div>
     <div class="apphead">
-      <div class="logo"><span class="mark">🔥</span><span class="word">binder</span></div>
+      <div class="logo"><img class="logoimg" src="logo.png" alt="binder"></div>
     </div>
 
     <div class="deck" id="deck">
@@ -442,7 +448,7 @@ a.btn{display:block;text-align:center;text-decoration:none}
   <!-- ============ DETAILS ============ -->
   <section class="screen" id="details">
     <div class="apphead" style="padding-top:18px"><button class="back" data-back="discover" aria-label="Back">‹</button>
-      <div class="logo" style="font-size:20px"><span class="mark">🔥</span><span class="word">binder</span></div>
+      <div class="logo" style="font-size:20px"><img class="logoimg" src="logo.png" alt="binder"></div>
     </div>
     <div class="scroll">
       <div>
@@ -502,12 +508,17 @@ a.btn{display:block;text-align:center;text-decoration:none}
   var CONFIG = {
     // Datos del evento (reemplaza los placeholders):
     event: {
-      date:    "",   // ej: "Sábado 22 de noviembre, 2026"
-      time:    "",   // ej: "7:00 p. m."
-      venue:   "",   // ej: "Cine Colombia — Sala Premium"
-      address: "",   // ej: "C.C. El Tesoro, Medellín"
-      city:    "",   // ej: "Medellín, Colombia"
-      dress:   ""    // ej: "Cómodo pero con actitud" (opcional)
+      // Lo general: se ve ANTES del swipe para que la gente sepa si puede ir.
+      teaserDate:  "Saturday, December 5 · 4:30 PM",
+      teaserPlace: "Cinemark · CC El Tesoro, Medellín",
+      // Lo completo: se ve DESPUÉS del swipe right.
+      date:    "Saturday, December 5, 2026",
+      time:    "4:30 PM",
+      venue:   "Cinemark · CC El Tesoro",
+      hall:    "Theater 9",
+      address: "Carrera 25A # 1A Sur – 45",
+      city:    "Medellín, Colombia",
+      dress:   ""    // ej: "Comfy but with attitude" (opcional)
     },
     // Formulario de Google: al hacer swipe right los datos se envían SOLOS en segundo plano
     // (el invitado nunca ve el formulario). Las respuestas caen en la hoja de cálculo del form.
@@ -523,7 +534,7 @@ a.btn{display:block;text-align:center;text-decoration:none}
     profile: {
       name: "Swipe Right",
       chip: "S1",
-      location: "In theaters · One night only",
+      location: "Dec 5 · CC El Tesoro, Medellín",
       bio: "Crime, toxic love and a getaway from Ohio to Tokyo to Colombia. All of season 1 on the big screen, for one night only. Swipe right if you dare to join us.",
       interests: ["Premiere", "Giant screen", "Crime & romance", "100% AI", "Dead Camera Studios"],
       // Slots de key art (placeholder). Reemplaza cada uno por una imagen cuando quieras.
@@ -586,6 +597,13 @@ a.btn{display:block;text-align:center;text-decoration:none}
   /* ============================================================
      SPLASH
      ============================================================ */
+  (function(){
+    var t = $("#teaser");
+    [["📅", CONFIG.event.teaserDate], ["📍", CONFIG.event.teaserPlace]].forEach(function(r){
+      if(!val(r[1])) return;
+      var s = document.createElement("span"); s.textContent = r[0] + " " + r[1]; t.appendChild(s);
+    });
+  })();
   $("#go-create").addEventListener("click", function(){ show("create"); $("#name-input").focus(); });
 
   /* ============================================================
@@ -648,7 +666,6 @@ a.btn{display:block;text-align:center;text-decoration:none}
           '<div class="art" style="background:'+ph.grad+'"></div>'+
           '<div class="ka">'+
             '<div class="srword">SWIPE<br>RIGHT<small>SERIES · AI</small></div>'+
-            '<div class="slot">'+ph.label+' · replace</div>'+
           '</div>'+
           '<div class="scrim"></div>';
       }
@@ -769,6 +786,7 @@ a.btn{display:block;text-align:center;text-decoration:none}
       { ic:"📅", k:"Date",      v: val(e.date),    todo:"Date to be confirmed" },
       { ic:"🕗", k:"Time",      v: val(e.time),    todo:"Time to be confirmed" },
       { ic:"🎟️", k:"Venue",     v: val(e.venue),   todo:"Theater to be confirmed" },
+      { ic:"🎬", k:"Screen",    v: val(e.hall),    todo:"Screen to be confirmed" },
       { ic:"📍", k:"Address",   v: val(e.address), todo:"Address to be confirmed" },
       { ic:"🌆", k:"City",      v: val(e.city),    todo:"City to be confirmed" }
     ];
@@ -793,7 +811,7 @@ a.btn{display:block;text-align:center;text-decoration:none}
     if(guest.photo){ av.innerHTML = '<img src="'+guest.photo+'" alt="">'; }
     var e = CONFIG.event;
     var when = [val(e.date), val(e.time)].filter(Boolean).join(" · ") || "Date and time to be confirmed";
-    var where = [val(e.venue), val(e.city)].filter(Boolean).join(" · ") || "Venue to be confirmed";
+    var where = [val(e.venue), val(e.hall), val(e.city)].filter(Boolean).join(" · ") || "Venue to be confirmed";
     // Only if the background send failed (e.g. no signal): offer the pre-filled form as a backup.
     var url = rsvp === "failed" ? formUrl() : "";
 
@@ -834,7 +852,7 @@ a.btn{display:block;text-align:center;text-decoration:none}
     var txt = "I'm confirming my attendance at the SWIPE RIGHT premiere.\n"+
       "Name: "+(guest.name||"")+"\n"+
       "Email: "+(guest.email||"")+"\n"+
-      "Event: "+[val(e.date),val(e.time),val(e.venue),val(e.city)].filter(Boolean).join(" · ");
+      "Event: "+[val(e.date),val(e.time),val(e.venue),val(e.hall),val(e.city)].filter(Boolean).join(" · ");
     var btn = $("#copy-btn");
     function ok(){ btn.textContent="✅ Copied"; setTimeout(function(){ btn.innerHTML="📋 Copy my details"; }, 1800); }
     if(navigator.clipboard && navigator.clipboard.writeText){
