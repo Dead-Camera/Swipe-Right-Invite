@@ -135,6 +135,8 @@ button{font-family:inherit}
 #splash p{margin:14px 0 0;max-width:30ch;color:var(--muted);font-size:15.5px;line-height:1.5}
 #splash .foot{margin-top:auto;padding-top:28px;width:100%}
 #splash .cta-wrap{width:100%;margin-top:34px}
+#splash .srhero{width:100%;max-width:330px;height:auto;filter:drop-shadow(0 8px 26px rgba(230,58,93,.35))}
+#splash h1{margin-top:20px}
 #splash .teaser{display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:22px}
 #splash .teaser span{background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:8px 15px;font-size:14px;font-weight:600;color:var(--fg)}
 .studio{display:flex;flex-direction:column;align-items:center;gap:9px}
@@ -404,7 +406,8 @@ a.btn{display:block;text-align:center;text-decoration:none}
   <section class="screen active" id="splash">
     <div class="apphead"><div class="logo"><img class="logoimg" src="logo.png" alt="binder"></div></div>
     <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center">
-      <h1><span style="background:var(--flame);-webkit-background-clip:text;background-clip:text;color:transparent">SWIPE RIGHT:</span> <span data-t="w_title"></span></h1>
+      <img class="srhero" src="sr-logo.png" alt="SWIPE RIGHT">
+      <h1 data-t="w_title"></h1>
       <p data-t="w_sub"></p>
       <div class="teaser" id="teaser"></div>
     </div>
@@ -619,7 +622,7 @@ a.btn{display:block;text-align:center;text-decoration:none}
   var L = {
     en: {
       // 1. Welcome
-      w_title: "a match worth seeing in person.",
+      w_title: "A match worth seeing in person.",
       w_sub: "The first-ever vertical series screened in a movie theater.",
       w_btn: "Create my profile",
       teaserDate: "Saturday, December 5 · 4:30 PM",
@@ -689,7 +692,7 @@ a.btn{display:block;text-align:center;text-decoration:none}
       copy_manual: "Copy manually: "
     },
     es: {
-      w_title: "un match que vale la pena ver en persona.",
+      w_title: "Un match que vale la pena ver en persona.",
       w_sub: "La primera serie vertical proyectada en una sala de cine.",
       w_btn: "Crear mi perfil",
       teaserDate: "Sábado 5 de diciembre · 4:30 p. m.",
