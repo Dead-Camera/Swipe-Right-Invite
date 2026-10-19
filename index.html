@@ -258,7 +258,6 @@ button{font-family:inherit}
 #pane-matches,#pane-messages,#pane-profile{overflow-y:auto;padding:4px 20px 18px}
 .pane h3{font-family:"Poppins",sans-serif;font-weight:800;font-size:20px;margin:6px 0 0}
 .pane .sub{color:var(--muted);font-size:14px;line-height:1.5;margin:6px 0 0}
-#deck-empty{visibility:hidden}
 .empty{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:6px;padding:24px}
 .empty .big{font-size:46px}
 .empty .btn{margin-top:18px;max-width:280px}
@@ -512,12 +511,6 @@ a.btn{display:block;text-align:center;text-decoration:none}
 
     <div class="pane on" id="pane-discover">
     <div class="deck" id="deck">
-      <div class="empty" id="deck-empty">
-        <div class="big">🎬</div>
-        <h3 data-t="e_title"></h3>
-        <p data-t="e_sub"></p>
-        <button class="btn" data-goto="details" data-t="see_plan"></button>
-      </div>
       <div class="card reset" id="card">
         <div class="bars-top" id="bars-top"></div>
         <div class="stamp like" id="stamp-like">Match</div>
@@ -716,11 +709,9 @@ a.btn{display:block;text-align:center;text-decoration:none}
       c_loc: "Medellín. One night only",
       c_bio: "The first-ever romantic thriller micro-drama.",
       c_tags: ["Premiere", "Vertical format", "Big screen", "Dead Camera Studios"],
-      c_mini: "💚 Swipe right to accept",
+      c_mini: "💚 Swipe right to accept", c_matched: "💚 It's a match",
       nudges: ["Nobody says no to SWIPE RIGHT 😏", "Are you sure? The big screen is waiting…", "Nobody swipes nope on a premiere. Swipe right →"],
       superlike: "💫 Super like — we can't wait to see you!",
-      e_title: "That's everyone for tonight",
-      e_sub: "You already matched with SWIPE RIGHT.",
       // nav + tabs
       n_discover: "Discover", n_matches: "Matches", n_messages: "Messages", n_profile: "Profile",
       mt_title: "Matches", mt_sub: "Meet the people of SWIPE RIGHT. Tap a profile to see their photos.", mt_tap: "Tap to see the plan →",
@@ -792,11 +783,9 @@ a.btn{display:block;text-align:center;text-decoration:none}
       c_loc: "Medellín. Solo por una noche",
       c_bio: "El primer thriller romántico en formato micro-drama.",
       c_tags: ["Estreno", "Formato vertical", "Pantalla grande", "Dead Camera Studios"],
-      c_mini: "💚 Desliza para aceptar",
+      c_mini: "💚 Desliza para aceptar", c_matched: "💚 Ya es un match",
       nudges: ["A SWIPE RIGHT no se le dice que no 😏", "¿Seguro? La pantalla grande te espera…", "Nadie le da nope a un estreno. Desliza a la derecha →"],
       superlike: "💫 Super like — ¡te esperamos!",
-      e_title: "No hay nadie más por esta noche",
-      e_sub: "Ya hiciste match con SWIPE RIGHT.",
       n_discover: "Descubre", n_matches: "Matches", n_messages: "Mensajes", n_profile: "Perfil",
       mt_title: "Matches", mt_sub: "Conoce a los personajes de SWIPE RIGHT. Toca un perfil para ver sus fotos.", mt_tap: "Toca para ver el plan →",
       mt_locked: "Desliza a la derecha a SWIPE RIGHT para desbloquear", mt_cast: "Los personajes",
@@ -1148,7 +1137,6 @@ a.btn{display:block;text-align:center;text-decoration:none}
     accepted = true;
     submitRSVP();
     $("#discover .actions").style.visibility = "hidden";
-    $("#deck-empty").style.visibility = "visible";
     if(guest.photo){ $("#match-you").innerHTML = '<img src="'+guest.photo+'" alt="">'; }
     var art = CONFIG.photos[0];
     if(art && art.img){ $("#match-sr").innerHTML = '<img src="'+art.img+'" alt="">'; }
@@ -1164,7 +1152,13 @@ a.btn{display:block;text-align:center;text-decoration:none}
       burst.appendChild(h);
     }
     renderTab(); buildDone();
-    setTimeout(function(){ show("match"); }, 480);
+    setTimeout(function(){
+      show("match");
+      // put the card back (matched, no longer swipeable) for when the guest returns to Discover
+      card.classList.remove("fly"); card.style.transform = ""; card.style.opacity = "";
+      $("#stamp-like").style.opacity = 0;
+      var mt = $("#card .minitag"); mt.setAttribute("data-t", "c_matched"); mt.textContent = t("c_matched");
+    }, 480);
   }
   $("#go-details").addEventListener("click", function(){ show("details"); });
 
