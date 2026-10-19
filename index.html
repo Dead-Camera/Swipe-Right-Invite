@@ -385,6 +385,48 @@ a.btn{display:block;text-align:center;text-decoration:none}
   .burst{display:none}
 }
 
+/* ---------- character profiles (Matches tab) ---------- */
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+.ccard{position:relative;aspect-ratio:3/4;border-radius:18px;overflow:hidden;border:0;padding:0;cursor:pointer;background:#2a2f42;color:#fff;text-align:left;font-family:inherit;
+  box-shadow:0 14px 30px -14px rgba(0,0,0,.8);transition:transform var(--d-fast) ease}
+.ccard:active{transform:scale(.97)}
+.ccard img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ccard .ph{position:absolute;inset:0;display:grid;place-items:center;font-family:"Poppins",sans-serif;font-weight:800;font-size:46px;color:rgba(255,255,255,.85)}
+.ccard .cap{position:absolute;left:0;right:0;bottom:0;padding:26px 12px 11px;background:linear-gradient(to top,rgba(8,9,14,.92),rgba(8,9,14,0))}
+.ccard .cap b{font-family:"Poppins",sans-serif;font-weight:800;font-size:17px}
+.ccard .cap span{font-size:15px;opacity:.9}
+.ccard .cap i{display:block;font-style:normal;font-size:11.5px;opacity:.75;margin-top:1px}
+.ccard .cnt{position:absolute;top:9px;right:9px;font-family:"Poppins",sans-serif;font-weight:700;font-size:10.5px;background:rgba(8,9,14,.55);padding:3px 8px;border-radius:999px}
+.mt-sec{font-family:"Poppins",sans-serif;font-weight:700;font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:20px}
+.mtile.locked{opacity:.75;cursor:default}
+.mtile.locked .av{filter:grayscale(.4)}
+
+.viewer{position:absolute;inset:0;z-index:35;background:var(--app);display:none;flex-direction:column;overflow-y:auto}
+.viewer.on{display:flex;animation:vIn .28s ease both}
+@keyframes vIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+.viewer .vhead{display:flex;align-items:center;justify-content:center;position:relative;padding:16px 20px 12px;flex:0 0 auto}
+.viewer .vclose{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;border:0;background:var(--surface-2);color:var(--fg);font-size:18px;cursor:pointer}
+.vcard{margin:0 14px 18px;border-radius:24px;overflow:hidden;background:#2b3142;box-shadow:0 24px 60px -24px rgba(0,0,0,.85);flex:0 0 auto}
+.vphotos{position:relative;aspect-ratio:1/1.02;background:#1f2433;touch-action:pan-y;user-select:none;-webkit-user-select:none;overflow:hidden}
+.vphotos .slide{position:absolute;inset:0;opacity:0;transition:opacity .25s ease}
+.vphotos .slide.show{opacity:1}
+.vphotos .slide img{width:100%;height:100%;object-fit:cover;pointer-events:none}
+.vphotos .slide .ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:rgba(255,255,255,.85);font-family:"Poppins",sans-serif;font-weight:800;font-size:64px}
+.vphotos .slide .ph small{font-size:11px;letter-spacing:.2em;font-weight:700;opacity:.75;text-transform:uppercase}
+.vphotos .vbars{position:absolute;top:12px;left:16%;right:16%;display:flex;gap:8px;z-index:3}
+.vphotos .vbars i{flex:1;height:5px;border-radius:3px;background:rgba(255,255,255,.4)}
+.vphotos .vbars i.on{background:#fff}
+.vphotos .vtap{position:absolute;top:0;bottom:0;width:40%;z-index:2}
+.vphotos .vtap.l{left:0}.vphotos .vtap.r{right:0}
+.vinfo{padding:18px 20px 22px;border-radius:22px 22px 0 0;margin-top:-22px;position:relative;z-index:4;background:linear-gradient(180deg,#363d52,#2b3142)}
+.vinfo .vn{font-family:"Poppins",sans-serif;font-size:27px;line-height:1.1}
+.vinfo .vn b{font-weight:800}
+.vinfo .vloc{color:rgba(255,255,255,.85);font-size:15px;margin-top:8px}
+.vinfo .vbio{font-size:15px;line-height:1.45;margin-top:4px;color:#fff}
+.vinfo .pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.vinfo .pill{background:#f45a52}
+.vhint{text-align:center;font-size:12px;color:var(--dim);margin:-6px 0 18px}
+
 /* ---------- language switch ---------- */
 .lang{position:absolute;top:18px;right:16px;z-index:40;display:flex;padding:3px;border:0;border-radius:999px;cursor:pointer;
   background:rgba(10,12,20,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 0 0 1px rgba(255,255,255,.1) inset}
@@ -520,6 +562,24 @@ a.btn{display:block;text-align:center;text-decoration:none}
       <a href="#" data-tab="profile"><span class="ic">👤</span><span data-t="n_profile"></span></a>
     </nav>
 
+    <div class="viewer" id="viewer">
+      <div class="vhead"><button class="vclose" id="vclose" aria-label="Close">✕</button>
+        <div class="logo"><img class="logoimg" src="logo.png" alt="binder"></div></div>
+      <div class="vcard">
+        <div class="vphotos" id="vphotos">
+          <div class="vbars" id="vbars"></div>
+          <div class="vtap l" data-v="-1"></div><div class="vtap r" data-v="1"></div>
+        </div>
+        <div class="vinfo">
+          <div class="vn" id="vname"></div>
+          <div class="vloc" id="vloc"></div>
+          <div class="vbio" id="vbio"></div>
+          <div class="pills" id="vpills"></div>
+        </div>
+      </div>
+      <div class="vhint" data-t="v_hint"></div>
+    </div>
+
     <div class="toast" id="toast"></div>
   </section>
 
@@ -610,6 +670,17 @@ a.btn{display:block;text-align:center;text-decoration:none}
       phoneEntry: "entry.49740755"     // pregunta "Phone"
     },
     calendarUrl: "",  // link "Agregar al calendario" (opcional)
+    // Personajes que salen en la pestaña Matches. Fotos: hasta 5 por personaje, en la carpeta chars/.
+    chars: [
+      { id: "wyatt", name: "Wyatt", age: 25, grad: "linear-gradient(150deg,#3a4a6b,#1c2233)",
+        photos: ["chars/wyatt-1.jpg"] },
+      { id: "dixie", name: "Dixie", age: 25, grad: "linear-gradient(150deg,#8a4b2a,#2a1c22)",
+        photos: ["chars/dixie-1.jpg"] },
+      { id: "sofia", name: "Sofía", age: 27, grad: "linear-gradient(150deg,#6b2a4a,#1c1a2a)",
+        photos: [] },
+      { id: "mike", name: "Mike", age: 24, grad: "linear-gradient(150deg,#2a6b5a,#1a2226)",
+        photos: [] }
+    ],
     // Key art del perfil. Para usar una imagen: { img: "archivo.jpg" }
     photos: [
       { grad: "linear-gradient(145deg,#ff5864,#fd267a)" },
@@ -652,8 +723,16 @@ a.btn{display:block;text-align:center;text-decoration:none}
       e_sub: "You already matched with SWIPE RIGHT.",
       // nav + tabs
       n_discover: "Discover", n_matches: "Matches", n_messages: "Messages", n_profile: "Profile",
-      mt_title: "Matches", mt_sub: "Your only match tonight — and the best one.", mt_tap: "Tap to see the plan →",
-      mt_none: "No matches yet", mt_none_sub: "Swipe right on SWIPE RIGHT and see what happens 😉", mt_back: "Back to Discover",
+      mt_title: "Matches", mt_sub: "Meet the people of SWIPE RIGHT. Tap a profile to see their photos.", mt_tap: "Tap to see the plan →",
+      mt_locked: "Swipe right on SWIPE RIGHT to unlock", mt_cast: "The cast",
+      v_hint: "Tap the sides or swipe to see more photos",
+      ph_soon: "Photos coming soon",
+      chars: {
+        wyatt: { loc: "Ohio", bio: "Looking for something real. Whatever that means.", tags: ["Cars", "Concerts", "Beach"] },
+        dixie: { loc: "Ohio", bio: "Not here for small talk. Or big talk. Just… talk.", tags: ["Adrenaline", "Cats", "Midnight Vandals"] },
+        sofia: { loc: "Colombia", bio: "I can tell when something doesn't add up. Usually, it's you.", tags: ["Tech", "Business", "The truth"] },
+        mike:  { loc: "Ohio", bio: "If the party's dead, I'm already on my way.", tags: ["Parties", "Loud music", "Living for today"] }
+      },
       ms_online: "● Online",
       ms_hey: function(n){ return "Hey " + n + " 😏"; },
       ms_ask: "Are you free on Saturday, December 5 at 4:30 PM? I'll be on the big screen at Cinemark, El Tesoro Mall.",
@@ -719,8 +798,16 @@ a.btn{display:block;text-align:center;text-decoration:none}
       e_title: "No hay nadie más por esta noche",
       e_sub: "Ya hiciste match con SWIPE RIGHT.",
       n_discover: "Descubre", n_matches: "Matches", n_messages: "Mensajes", n_profile: "Perfil",
-      mt_title: "Matches", mt_sub: "Tu único match esta noche, y el mejor.", mt_tap: "Toca para ver el plan →",
-      mt_none: "Aún no tienes matches", mt_none_sub: "Desliza a la derecha a SWIPE RIGHT y mira qué pasa 😉", mt_back: "Volver a Descubre",
+      mt_title: "Matches", mt_sub: "Conoce a los personajes de SWIPE RIGHT. Toca un perfil para ver sus fotos.", mt_tap: "Toca para ver el plan →",
+      mt_locked: "Desliza a la derecha a SWIPE RIGHT para desbloquear", mt_cast: "Los personajes",
+      v_hint: "Toca los lados o desliza para ver más fotos",
+      ph_soon: "Fotos muy pronto",
+      chars: {
+        wyatt: { loc: "Ohio", bio: "Busco algo real. Sea lo que sea que eso signifique.", tags: ["Carros", "Conciertos", "Playa"] },
+        dixie: { loc: "Ohio", bio: "No vine a hablar de cosas pequeñas. Ni grandes. Solo… a hablar.", tags: ["Adrenalina", "Gatos", "Midnight Vandals"] },
+        sofia: { loc: "Colombia", bio: "Sé cuándo algo no cuadra. Casi siempre eres tú.", tags: ["Tecnología", "Negocios", "La verdad"] },
+        mike:  { loc: "Ohio", bio: "Si la fiesta está muerta, ya voy en camino.", tags: ["Fiestas", "Música a todo volumen", "Vivir el día"] }
+      },
       ms_online: "● En línea",
       ms_hey: function(n){ return "Hola " + n + " 😏"; },
       ms_ask: "¿Estás libre el sábado 5 de diciembre a las 4:30 p. m.? Voy a estar en pantalla grande en Cinemark, CC El Tesoro.",
@@ -792,7 +879,7 @@ a.btn{display:block;text-align:center;text-decoration:none}
     var pills = $("#sr-pills"); pills.innerHTML = "";
     t("c_tags").forEach(function(x){ var s = document.createElement("span"); s.className="pill"; s.textContent=x; pills.appendChild(s); });
     $("#copy-btn").textContent = t("t_copy");
-    renderTab(); buildDetails(); buildDone();
+    renderTab(); renderViewer(); buildDetails(); buildDone();
   }
   $("#lang").addEventListener("click", function(){
     lang = lang === "en" ? "es" : "en";
@@ -960,13 +1047,21 @@ a.btn{display:block;text-align:center;text-decoration:none}
     var first = (guest.name||"").split(" ")[0];
 
     if(tab==="matches"){
-      $("#pane-matches").innerHTML = accepted
-        ? '<h3>'+esc(t("mt_title"))+'</h3><p class="sub">'+esc(t("mt_sub"))+'</p>'+
-          '<button class="mtile" data-goto="details"><span class="av">SWIPE<br>RIGHT</span>'+
+      var mh = '<h3>'+esc(t("mt_title"))+'</h3><p class="sub">'+esc(t("mt_sub"))+'</p>';
+      mh += accepted
+        ? '<button class="mtile" data-goto="details"><span class="av">SWIPE<br>RIGHT</span>'+
           '<span><span class="t">SWIPE RIGHT</span><span class="s" style="display:block">'+esc(t("mt_tap"))+'</span></span></button>'
-        : '<div class="lock"><div class="big">🔒</div><h3>'+esc(t("mt_none"))+'</h3>'+
-          '<p class="sub">'+esc(t("mt_none_sub"))+'</p>'+
-          '<button class="btn" data-tab="discover">'+esc(t("mt_back"))+'</button></div>';
+        : '<button class="mtile locked" data-tab="discover"><span class="av">🔒</span>'+
+          '<span><span class="t">SWIPE RIGHT</span><span class="s" style="display:block">'+esc(t("mt_locked"))+'</span></span></button>';
+      mh += '<div class="mt-sec">'+esc(t("mt_cast"))+'</div><div class="cgrid">';
+      CONFIG.chars.forEach(function(c){
+        var d = t("chars")[c.id];
+        mh += '<button class="ccard" data-char="'+c.id+'" style="background:'+c.grad+'">'+
+          (c.photos[0] ? '<img src="'+c.photos[0]+'" alt="">' : '<span class="ph">'+esc(c.name.charAt(0))+'</span>')+
+          (c.photos.length > 1 ? '<span class="cnt">'+c.photos.length+' 📷</span>' : '')+
+          '<span class="cap"><b>'+esc(c.name)+'</b><span>, '+c.age+'</span><i>'+esc(d.loc)+'</i></span></button>';
+      });
+      $("#pane-matches").innerHTML = mh + '</div>';
     }
     if(tab==="messages"){
       $("#msg-dot").hidden = true;
@@ -989,7 +1084,56 @@ a.btn{display:block;text-align:center;text-decoration:none}
         '</div>';
     }
   }
+  /* ---------- character profile viewer (photo carousel) ---------- */
+  var vChar = null, vIdx = 0;
+  function openChar(id){
+    vChar = CONFIG.chars.filter(function(c){ return c.id===id; })[0];
+    if(!vChar) return;
+    vIdx = 0; renderViewer();
+    var v = $("#viewer"); v.classList.add("on"); v.scrollTop = 0;
+  }
+  function renderViewer(){
+    if(!vChar) return;
+    var d = t("chars")[vChar.id], ph = $("#vphotos");
+    $$(".slide", ph).forEach(function(n){ n.remove(); });
+    var list = vChar.photos.length ? vChar.photos : [null];
+    list.forEach(function(src, i){
+      var sl = document.createElement("div");
+      sl.className = "slide" + (i===vIdx ? " show" : "");
+      sl.style.background = vChar.grad;
+      sl.innerHTML = src ? '<img src="'+src+'" alt="">' : '<div class="ph">'+esc(vChar.name.charAt(0))+'<small>'+esc(t("ph_soon"))+'</small></div>';
+      ph.insertBefore(sl, ph.firstChild);
+    });
+    $(".vhint").style.visibility = list.length > 1 ? "visible" : "hidden";
+    $("#vbars").innerHTML = list.length > 1 ? list.map(function(_, i){ return '<i'+(i===vIdx?' class="on"':'')+'></i>'; }).join("") : "";
+    $("#vname").innerHTML = '<b>'+esc(vChar.name)+'</b>, '+vChar.age;
+    $("#vloc").textContent = d.loc;
+    $("#vbio").textContent = d.bio;
+    $("#vpills").innerHTML = d.tags.map(function(x){ return '<span class="pill">'+esc(x)+'</span>'; }).join("");
+  }
+  function vGo(step){
+    if(!vChar || vChar.photos.length < 2) return;
+    vIdx = (vIdx + step + vChar.photos.length) % vChar.photos.length;
+    var slides = $$(".slide", $("#vphotos")).reverse();
+    slides.forEach(function(n, i){ n.classList.toggle("show", i===vIdx); });
+    $$("#vbars i").forEach(function(b, i){ b.classList.toggle("on", i===vIdx); });
+  }
+  $("#vclose").addEventListener("click", function(){ $("#viewer").classList.remove("on"); vChar = null; });
+  (function(){
+    var ph = $("#vphotos"), sx = null, sy = 0;
+    ph.addEventListener("pointerdown", function(e){ sx = e.clientX; sy = e.clientY; });
+    ph.addEventListener("pointerup", function(e){
+      if(sx === null) return;
+      var dx = e.clientX - sx, dy = e.clientY - sy; sx = null;
+      if(Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)){ vGo(dx < 0 ? 1 : -1); return; }
+      var z = e.target.closest(".vtap"); if(z) vGo(parseInt(z.getAttribute("data-v"),10));
+    });
+    ph.addEventListener("pointercancel", function(){ sx = null; });
+  })();
+
   $("#discover").addEventListener("click", function(ev){
+    var ch = ev.target.closest("[data-char]");
+    if(ch){ openChar(ch.getAttribute("data-char")); return; }
     var tb = ev.target.closest("[data-tab]");
     if(tb){ ev.preventDefault(); tab = tb.getAttribute("data-tab"); renderTab(); return; }
     var g = ev.target.closest("[data-goto]");
