@@ -97,7 +97,7 @@ button{font-family:inherit}
 }
 .apphead{
   flex:0 0 auto;display:flex;align-items:center;justify-content:center;
-  padding:6px 20px 14px;position:relative;
+  padding:16px 20px 12px;position:relative;
 }
 .apphead .back{position:absolute;left:18px;top:50%;transform:translateY(-50%);
   background:none;border:0;color:var(--fg);font-size:22px;cursor:pointer;opacity:.85;padding:4px;line-height:1}
@@ -125,11 +125,12 @@ button{font-family:inherit}
 .dim{color:var(--dim)}
 
 /* ---------- SPLASH ---------- */
-#splash{align-items:center;justify-content:center;text-align:center;padding:40px 30px;gap:0}
+#splash{align-items:center;justify-content:center;text-align:center;padding:0 30px;gap:0}
+#splash .apphead{align-self:stretch}
 #splash .big{font-size:62px}
 #splash h1{
   font-family:"Poppins",sans-serif;font-weight:800;font-size:30px;line-height:1.08;
-  margin:26px 0 0;text-wrap:balance;
+  margin:0;text-wrap:balance;
 }
 #splash p{margin:14px 0 0;max-width:30ch;color:var(--muted);font-size:15.5px;line-height:1.5}
 #splash .foot{margin-top:auto;padding-top:28px;width:100%}
@@ -143,7 +144,7 @@ button{font-family:inherit}
 #splash .by{margin-top:18px;font-size:12px;letter-spacing:.04em}
 
 /* ---------- CREATE PROFILE ---------- */
-#create{padding:4px 26px 26px}
+#create{padding:0 26px 26px}
 #create .body{flex:1;display:flex;flex-direction:column;gap:20px;overflow-y:auto}
 #create h2{font-family:"Poppins",sans-serif;font-weight:800;font-size:23px;margin:4px 0 0;text-wrap:balance}
 #create .sub{color:var(--muted);font-size:14.5px;margin:8px 0 2px;line-height:1.45}
@@ -278,7 +279,7 @@ button{font-family:inherit}
 #match .ph-name{font-weight:700}
 
 /* ---------- DETAILS ---------- */
-#details{padding:4px 24px 24px}
+#details{padding:0 24px 24px}
 #details .scroll{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:16px;padding-bottom:6px}
 #details .scroll > *, #done .scroll > *, #create .body > *{flex-shrink:0}
 #details h2{font-family:"Poppins",sans-serif;font-weight:800;font-size:24px;margin:6px 0 0;text-wrap:balance}
@@ -334,12 +335,8 @@ a.btn{display:block;text-align:center;text-decoration:none}
 
   <!-- ============ SPLASH ============ -->
   <section class="screen active" id="splash">
-    <div class="statusbar">
-      <span class="sig"><span>5G</span><span class="bars"><i></i><i></i><i></i><i></i></span></span>
-      <span class="batt"><span></span></span>
-    </div>
+    <div class="apphead"><div class="logo"><img class="logoimg" src="logo.png" alt="binder"></div></div>
     <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center">
-      <div class="logo" style="font-size:42px"><img class="logoimg" src="logo.png" alt="binder"></div>
       <h1>You matched with the<br><span style="background:var(--flame);-webkit-background-clip:text;background-clip:text;color:transparent">SWIPE RIGHT</span> premiere</h1>
       <p>One night. One giant screen. All of season 1. Create your profile and swipe to accept your invitation.</p>
       <div class="teaser" id="teaser"></div>
@@ -352,12 +349,8 @@ a.btn{display:block;text-align:center;text-decoration:none}
 
   <!-- ============ CREATE PROFILE ============ -->
   <section class="screen" id="create">
-    <div class="statusbar">
-      <span class="sig"><span>5G</span><span class="bars"><i></i><i></i><i></i><i></i></span></span>
-      <span class="batt"><span></span></span>
-    </div>
     <div class="apphead"><button class="back" data-back="splash" aria-label="Back">‹</button>
-      <div class="logo" style="font-size:22px"><img class="logoimg" src="logo.png" alt="binder"></div>
+      <div class="logo"><img class="logoimg" src="logo.png" alt="binder"></div>
     </div>
     <div class="body">
       <div>
@@ -394,10 +387,6 @@ a.btn{display:block;text-align:center;text-decoration:none}
 
   <!-- ============ DISCOVER / SWIPE ============ -->
   <section class="screen" id="discover">
-    <div class="statusbar">
-      <span class="sig"><span>5G</span><span class="bars"><i></i><i></i><i></i><i></i></span></span>
-      <span class="batt"><span></span></span>
-    </div>
     <div class="apphead">
       <div class="logo"><img class="logoimg" src="logo.png" alt="binder"></div>
     </div>
@@ -451,8 +440,8 @@ a.btn{display:block;text-align:center;text-decoration:none}
 
   <!-- ============ DETAILS ============ -->
   <section class="screen" id="details">
-    <div class="apphead" style="padding-top:18px"><button class="back" data-back="discover" aria-label="Back">‹</button>
-      <div class="logo" style="font-size:20px"><img class="logoimg" src="logo.png" alt="binder"></div>
+    <div class="apphead"><button class="back" data-back="discover" aria-label="Back">‹</button>
+      <div class="logo"><img class="logoimg" src="logo.png" alt="binder"></div>
     </div>
     <div class="scroll">
       <div>
