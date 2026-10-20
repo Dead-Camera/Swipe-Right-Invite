@@ -153,10 +153,10 @@ button{font-family:inherit}
 .avatar-pick{display:flex;flex-direction:column;align-items:center;gap:12px;margin:6px 0 2px}
 .avatar{
   width:118px;height:118px;border-radius:50%;background:var(--surface-2);
-  display:grid;place-items:center;overflow:hidden;position:relative;
+  display:grid;place-items:center;overflow:visible;position:relative;
   box-shadow:0 0 0 3px rgba(255,255,255,.06), 0 10px 30px -12px rgba(0,0,0,.6);
 }
-.avatar img{width:100%;height:100%;object-fit:cover}
+.avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%}
 .avatar .ph{font-size:40px;opacity:.5}
 .avatar .cam{
   position:absolute;right:-2px;bottom:-2px;width:38px;height:38px;border-radius:50%;
@@ -699,7 +699,7 @@ a.btn{display:block;text-align:center;text-decoration:none}
     // Personajes que salen en la pestaña Matches. Fotos: hasta 5 por personaje, en la carpeta chars/.
     chars: [
       { id: "wyatt", name: "Wyatt", age: 25, grad: "linear-gradient(150deg,#3a4a6b,#1c2233)",
-        photos: ["chars/wyatt-1.jpg"] },
+        photos: ["chars/wyatt-1.jpg", "chars/wyatt-2.jpg"] },
       { id: "dixie", name: "Dixie", age: 25, grad: "linear-gradient(150deg,#8a4b2a,#2a1c22)",
         photos: ["chars/dixie-1.jpg", "chars/dixie-2.jpg", "chars/dixie-3.jpg"] },
       { id: "sofia", name: "Sofía", age: 27, grad: "linear-gradient(150deg,#6b2a4a,#1c1a2a)",
