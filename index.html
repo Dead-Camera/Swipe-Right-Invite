@@ -230,12 +230,10 @@ button{font-family:inherit}
 .pill{background:rgba(255,88,100,.9);color:#fff;font-family:"Poppins",sans-serif;font-weight:600;font-size:12.5px;
   padding:7px 13px;border-radius:999px;white-space:nowrap}
 
-/* swipe stamps */
-.stamp{position:absolute;top:30px;z-index:6;font-family:"Poppins",sans-serif;font-weight:800;
-  font-size:30px;letter-spacing:.06em;padding:7px 16px;border-radius:12px;opacity:0;pointer-events:none;
-  transform:rotate(-14deg);text-transform:uppercase}
-.stamp.like{left:22px;color:var(--like-1);border:4px solid var(--like-1);transform:rotate(-16deg)}
-.stamp.nope{right:22px;color:var(--nope-1);border:4px solid var(--nope-1);transform:rotate(16deg)}
+/* swipe feedback: the card's edge glows green (right) or pink (left) */
+.glow{position:absolute;inset:0;border-radius:inherit;z-index:6;pointer-events:none;opacity:0;
+  box-shadow:inset 0 0 0 3px var(--gc), inset 0 0 38px 6px var(--gc)}
+.card.glowing{transition:box-shadow .08s linear}
 
 /* action buttons */
 .actions{flex:0 0 auto;display:flex;align-items:center;justify-content:center;gap:26px;padding:16px 0 12px}
@@ -547,8 +545,7 @@ a.btn{display:block;text-align:center;text-decoration:none}
       <div class="card reset" id="card">
         <div class="bars-top" id="bars-top"></div>
         <img class="cardlogo" src="sr-logo-white.png" alt="SWIPE RIGHT">
-        <div class="stamp like" id="stamp-like">Match</div>
-        <div class="stamp nope" id="stamp-nope">Nope</div>
+        <div class="glow" id="glow"></div>
         <div class="photos" id="photos"></div>
         <button class="parrow l" data-arrow="-1" aria-label="Previous photo">‹</button>
         <button class="parrow r" data-arrow="1" aria-label="Next photo">›</button>
@@ -1090,8 +1087,7 @@ a.btn{display:block;text-align:center;text-decoration:none}
     dx = e.clientX - startX; dy = e.clientY - startY;
     if(Math.abs(dx)>6 || Math.abs(dy)>6) moved=true;
     card.style.transform = "translate("+dx+"px,"+(dy*0.25)+"px) rotate("+(dx/18)+"deg)";
-    $("#stamp-like").style.opacity = Math.max(0, Math.min(1, dx/THRESH));
-    $("#stamp-nope").style.opacity = Math.max(0, Math.min(1, -dx/THRESH));
+    setGlow(dx);
   }
   function onUp(e){
     if(!dragging) return;
@@ -1106,9 +1102,17 @@ a.btn{display:block;text-align:center;text-decoration:none}
     else if(dx < -THRESH){ springBack(); nudge(); }
     else { springBack(); }
   }
+  /* Edge glow while dragging: green toward "yes", pink toward "no". */
+  function setGlow(x){
+    var g = $("#glow"), p = Math.max(0, Math.min(1, Math.abs(x)/THRESH));
+    var rgb = x >= 0 ? "63,196,99" : "255,84,214";
+    g.style.setProperty("--gc", "rgba("+rgb+",.9)");
+    g.style.opacity = p;
+    card.style.boxShadow = p ? "0 0 "+(34*p)+"px "+(4*p)+"px rgba("+rgb+","+(.55*p)+"), 0 24px 60px -24px rgba(0,0,0,.85)" : "";
+  }
   function springBack(){
     card.classList.add("reset"); card.style.transform = "";
-    $("#stamp-like").style.opacity=0; $("#stamp-nope").style.opacity=0;
+    setGlow(0);
   }
   function fly(dir){
     card.classList.remove("reset"); card.classList.add("fly");
@@ -1292,7 +1296,7 @@ a.btn{display:block;text-align:center;text-decoration:none}
   function markMatched(){
     $("#discover .actions").style.visibility = "hidden";
     card.classList.remove("fly"); card.style.transform = ""; card.style.opacity = "";
-    $("#stamp-like").style.opacity = 0;
+    setGlow(0);
     var mt = $("#card .minitag"); mt.setAttribute("data-t", "c_matched"); mt.textContent = t("c_matched");
   }
   function accept(){
