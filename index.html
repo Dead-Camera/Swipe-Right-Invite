@@ -125,7 +125,11 @@ button{font-family:inherit}
 .dim{color:var(--dim)}
 
 /* ---------- SPLASH ---------- */
-#splash{align-items:center;justify-content:center;text-align:center;padding:0 30px;gap:0}
+#splash{align-items:center;text-align:center;padding:0 30px;gap:0;overflow-y:auto;overflow-x:hidden}
+#splash .sp-hero{flex:0 0 auto;min-height:100%;width:100%;display:flex;flex-direction:column;align-items:center}
+#splash .sp-more{margin-top:14px;font-size:22px;line-height:1;color:var(--dim);animation:bob 1.8s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+#splash .sp-poster{flex:0 0 auto;display:block;width:100%;height:auto;border-radius:20px;margin:6px 0 30px;box-shadow:0 24px 60px -24px rgba(0,0,0,.85)}
 #splash .apphead{align-self:stretch}
 #splash .big{font-size:62px}
 #splash h1{
@@ -133,7 +137,7 @@ button{font-family:inherit}
   margin:0;text-wrap:balance;
 }
 #splash p{margin:14px 0 0;max-width:30ch;color:var(--muted);font-size:15.5px;line-height:1.5}
-#splash .foot{margin-top:auto;padding-top:28px;width:100%}
+#splash .foot{margin-top:auto;padding-top:28px;width:100%;padding-left:0!important;padding-right:0!important}
 #splash .cta-wrap{width:100%;margin-top:34px}
 #splash .srhero{width:100%;max-width:330px;height:auto;filter:drop-shadow(0 8px 26px rgba(230,58,93,.35))}
 #splash h1{margin-top:20px}
@@ -484,6 +488,7 @@ a.btn{display:block;text-align:center;text-decoration:none}
 
   <!-- ============ 1. WELCOME ============ -->
   <section class="screen active" id="splash">
+   <div class="sp-hero">
     <div class="apphead"><div class="logo"><img class="logoimg" src="logo.png" alt="binder"></div></div>
     <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center">
       <img class="srhero" src="sr-logo-v3.png" alt="SWIPE RIGHT">
@@ -494,7 +499,10 @@ a.btn{display:block;text-align:center;text-decoration:none}
     <div class="foot" style="padding:0 30px 30px">
       <button class="btn" id="go-create" data-t="w_btn"></button>
       <div class="studio" style="margin-top:22px"><span class="lbl" data-t="studio"></span><img src="deadcamera.png" alt="Dead Camera Studios"></div>
+      <div class="sp-more" aria-hidden="true">⌄</div>
     </div>
+   </div>
+    <img class="sp-poster" id="sp-poster" alt="SWIPE RIGHT">
   </section>
 
   <!-- ============ 2. PROFILE ============ -->
@@ -735,9 +743,9 @@ a.btn{display:block;text-align:center;text-decoration:none}
   var L = {
     en: {
       // 1. Welcome
-      w_title: "A match worth seeing in person.",
+      w_title: "You're invited to the exclusive screening",
       w_sub: "The first-ever vertical series screened in a movie theater.",
-      w_btn: "Create my profile",
+      w_btn: "RSVP IN THE BINDER APP >>",
       teaserDate: "Saturday, December 5 · 4:30 PM",
       teaserPlace: "Cinemark · El Tesoro Mall, Medellín",
       studio: "An original series from",
@@ -816,9 +824,9 @@ a.btn{display:block;text-align:center;text-decoration:none}
       copy_manual: "Copy manually: "
     },
     es: {
-      w_title: "Un match que vale la pena ver en persona.",
+      w_title: "Estás invitado a la proyección exclusiva",
       w_sub: "La primera serie vertical proyectada en una sala de cine.",
-      w_btn: "Crear mi perfil",
+      w_btn: "CONFIRMA EN LA APP BINDER >>",
       teaserDate: "Sábado 5 de diciembre · 4:30 p. m.",
       teaserPlace: "Cinemark · CC El Tesoro, Medellín",
       studio: "Una serie original de",
@@ -1006,6 +1014,7 @@ a.btn{display:block;text-align:center;text-decoration:none}
   /* ============================================================
      1. WELCOME → 2. PROFILE
      ============================================================ */
+  (function(){ var a = CONFIG.photos[0], el = $("#sp-poster"); if(a && a.img) el.src = a.img; else el.remove(); })();
   $("#go-create").addEventListener("click", function(){ show("create"); $("#name-input").focus(); });
 
   var nameInput = $("#name-input"), emailInput = $("#email-input"), phoneInput = $("#phone-input");
