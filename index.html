@@ -448,6 +448,11 @@ a.btn{display:block;text-align:center;text-decoration:none}
 .phone *{scrollbar-width:none}
 .phone *::-webkit-scrollbar{display:none}
 
+/* SWIPE RIGHT poster thumbnails */
+.mtile .av,.chat .who .av{position:relative;overflow:hidden}
+.mtile .av img,.chat .who .av img{width:100%;height:100%;object-fit:cover;object-position:50% 30%}
+.mtile .av .lk{position:absolute;inset:0;display:grid;place-items:center;font-style:normal;font-size:20px;background:rgba(10,12,20,.5)}
+
 /* photo arrows (SWIPE RIGHT card + character profiles) */
 .parrow{position:absolute;top:22%;z-index:5;width:36px;height:36px;border-radius:50%;border:0;cursor:pointer;
   background:rgba(10,12,20,.45);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);color:#fff;
@@ -1135,6 +1140,11 @@ a.btn{display:block;text-align:center;text-decoration:none}
   $("#act-nope").addEventListener("click", function(){ if(accepted) return; nudge(); });
 
   /* ---------- bottom nav ---------- */
+  /* Small round SWIPE RIGHT picture (the poster) for Matches and Messages. */
+  function srThumb(){
+    var a = CONFIG.photos[0];
+    return a && a.img ? '<img src="'+a.img+'" alt="SWIPE RIGHT">' : 'SWIPE<br>RIGHT';
+  }
   function avatarHtml(){ return guest.photo ? '<img src="'+guest.photo+'" alt="">' : "👤"; }
   function renderTab(){
     $$(".nav a").forEach(function(a){ a.classList.toggle("on", a.getAttribute("data-tab")===tab); });
@@ -1144,9 +1154,9 @@ a.btn{display:block;text-align:center;text-decoration:none}
     if(tab==="matches"){
       var mh = '<h3>'+esc(t("mt_title"))+'</h3><p class="sub">'+esc(t("mt_sub"))+'</p>';
       mh += accepted
-        ? '<button class="mtile" data-goto="details"><span class="av">SWIPE<br>RIGHT</span>'+
+        ? '<button class="mtile" data-goto="details"><span class="av">'+srThumb()+'</span>'+
           '<span><span class="t">SWIPE RIGHT</span><span class="s" style="display:block">'+esc(t("mt_tap"))+'</span></span></button>'
-        : '<button class="mtile locked" data-tab="discover"><span class="av">🔒</span>'+
+        : '<button class="mtile locked" data-tab="discover"><span class="av">'+srThumb()+'<i class="lk">🔒</i></span>'+
           '<span><span class="t">SWIPE RIGHT</span><span class="s" style="display:block">'+esc(t("mt_locked"))+'</span></span></button>';
       mh += '<div class="mt-sec">'+esc(t("mt_cast"))+'</div><div class="cgrid">';
       CONFIG.chars.forEach(function(c){
@@ -1160,7 +1170,7 @@ a.btn{display:block;text-align:center;text-decoration:none}
     }
     if(tab==="messages"){
       $("#msg-dot").hidden = true;
-      var h = '<div class="chat"><div class="who"><span class="av">SWIPE<br>RIGHT</span><div><b>SWIPE RIGHT</b><span>'+esc(t("ms_online"))+'</span></div></div>'+
+      var h = '<div class="chat"><div class="who"><span class="av">'+srThumb()+'</span><div><b>SWIPE RIGHT</b><span>'+esc(t("ms_online"))+'</span></div></div>'+
         '<div class="bub">'+esc(t("ms_hey")(first).replace("  "," "))+'</div>'+
         '<div class="bub">'+esc(t("ms_ask"))+'</div>';
       h += accepted
