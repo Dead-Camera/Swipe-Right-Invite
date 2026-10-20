@@ -139,6 +139,11 @@ button{font-family:inherit}
 #splash p{margin:14px 0 0;max-width:30ch;color:var(--muted);font-size:15.5px;line-height:1.5}
 #splash .foot{margin-top:auto;padding-top:28px;width:100%;padding-left:0!important;padding-right:0!important}
 #splash .cta-wrap{width:100%;margin-top:34px}
+#splash .invby{display:flex;align-items:center;gap:8px;margin:0 0 18px;padding:8px 16px 8px 9px;border-radius:999px;
+  background:linear-gradient(135deg,rgba(255,154,61,.16),rgba(253,38,122,.2));border:1px solid rgba(255,88,100,.35);
+  font-family:"Poppins",sans-serif;font-size:14px;color:var(--fg);animation:fadeUp .5s ease both}
+#splash .invby .ini{width:28px;height:28px;border-radius:50%;background:var(--flame);display:grid;place-items:center;font-weight:800;font-size:13px;color:#fff;flex:0 0 auto}
+#splash .invby b{font-weight:800}
 #splash .srhero{width:100%;max-width:330px;height:auto;filter:drop-shadow(0 8px 26px rgba(230,58,93,.35))}
 #splash h1{margin-top:20px}
 #splash .teaser{display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:22px}
@@ -491,6 +496,7 @@ a.btn{display:block;text-align:center;text-decoration:none}
    <div class="sp-hero">
     <div class="apphead"><div class="logo"><img class="logoimg" src="logo.png" alt="binder"></div></div>
     <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center">
+      <div class="invby" id="invby" hidden></div>
       <img class="srhero" src="sr-logo-v3.png" alt="SWIPE RIGHT">
       <h1 data-t="w_title"></h1>
       <p data-t="w_sub"></p>
@@ -709,7 +715,8 @@ a.btn{display:block;text-align:center;text-decoration:none}
       base: "https://docs.google.com/forms/d/e/1FAIpQLScD-Q2oK7vBuIr0aaSjr56R0olextiFyShhoPU_O8m7mWYXQA/viewform",
       nameEntry:  "entry.1537169254",  // pregunta "Name"
       emailEntry: "entry.886656657",   // pregunta "Email"
-      phoneEntry: "entry.49740755"     // pregunta "Phone"
+      phoneEntry: "entry.49740755",    // pregunta "Phone"
+      inviterEntry: ""                 // pregunta "Invited by" (pendiente: falta el código entry.XXXX)
     },
     calendarUrl: "",  // link "Agregar al calendario" (opcional)
     // Personajes que salen en la pestaña Matches. Fotos: hasta 5 por personaje, en la carpeta chars/.
@@ -810,7 +817,8 @@ a.btn{display:block;text-align:center;text-decoration:none}
       t_event: "Event", t_event_v: "SWIPE RIGHT Premiere",
       t_when: "When", t_when_v: "Saturday, December 5 · 4:30 PM",
       t_where: "Where", t_where_v: "Cinemark · El Tesoro Mall · Theater 9 · Carrera 25A # 1A Sur – 45, Medellín",
-      t_name: "Name",
+      t_name: "Name", t_inv: "Invited by",
+      inv_from: function(n){ return "<b>"+n+"</b> invites you to"; },
       t_final: "Don't stand us up.",
       t_copy: "📋 Copy my details", t_copied: "✅ Copied", t_cast: "💘 Back to my matches",
       t_copytxt: "I'm confirming my attendance at the SWIPE RIGHT premiere.",
@@ -885,7 +893,8 @@ a.btn{display:block;text-align:center;text-decoration:none}
       t_event: "Evento", t_event_v: "Premiere de SWIPE RIGHT",
       t_when: "Cuándo", t_when_v: "Sábado 5 de diciembre · 4:30 p. m.",
       t_where: "Dónde", t_where_v: "Cinemark CC El Tesoro · Sala 9 · Carrera 25A # 1A Sur – 45, Medellín",
-      t_name: "Nombre",
+      t_name: "Nombre", t_inv: "Invitado por",
+      inv_from: function(n){ return "<b>"+n+"</b> te invita a"; },
       t_final: "No nos dejes plantados.",
       t_copy: "📋 Copiar mis datos", t_copied: "✅ Copiado", t_cast: "💘 Volver a mis matches",
       t_copytxt: "Confirmo mi asistencia a la premiere de SWIPE RIGHT.",
@@ -921,6 +930,16 @@ a.btn{display:block;text-align:center;text-decoration:none}
   /* The guest's profile is remembered on their own phone (browser storage),
      so reopening the link shows their profile and ticket again. */
   var STORE = "sr-guest";
+
+  /* Personal links: ?de=Laura (or ?from=Laura) shows "Laura te invita a…".
+     The name is remembered on the guest's phone in case they reopen the plain link. */
+  var inviter = "";
+  try{
+    var qp = new URLSearchParams(location.search);
+    inviter = (qp.get("de") || qp.get("from") || "").replace(/\s+/g," ").trim().slice(0,30);
+    if(inviter) localStorage.setItem("sr-inviter", inviter);
+    else inviter = localStorage.getItem("sr-inviter") || "";
+  }catch(_){}
   function saveGuest(){
     try{ localStorage.setItem(STORE, JSON.stringify({ g: guest, accepted: accepted })); }catch(_){}
   }
@@ -962,6 +981,8 @@ a.btn{display:block;text-align:center;text-decoration:none}
     $$("#lang span").forEach(function(s){ s.classList.toggle("on", s.getAttribute("data-l")===lang); });
     $$("[data-t]").forEach(function(el){ el.textContent = t(el.getAttribute("data-t")); });
     $$("[data-tp]").forEach(function(el){ el.placeholder = t(el.getAttribute("data-tp")); });
+    var ib = $("#invby");
+    if(inviter){ ib.hidden = false; ib.innerHTML = '<span class="ini">'+esc(inviter.charAt(0).toUpperCase())+'</span><span>'+t("inv_from")(esc(inviter))+'</span>'; }
     var tz = $("#teaser"); tz.innerHTML = "";
     [["📅", t("teaserDate")], ["📍", t("teaserPlace")]].forEach(function(r){
       var s = document.createElement("span"); s.textContent = r[0] + " " + r[1]; tz.appendChild(s);
@@ -983,6 +1004,7 @@ a.btn{display:block;text-align:center;text-decoration:none}
     if(f.nameEntry)  p.append(f.nameEntry, guest.name);
     if(f.emailEntry) p.append(f.emailEntry, guest.email);
     if(f.phoneEntry) p.append(f.phoneEntry, guest.phone);
+    if(f.inviterEntry) p.append(f.inviterEntry, inviter);
     return p;
   }
   /* Pre-filled form link — only shown if the background send fails. */
@@ -1381,7 +1403,8 @@ a.btn{display:block;text-align:center;text-decoration:none}
       '<b>'+esc(t("t_event"))+':</b> '+esc(t("t_event_v"))+'<br>'+
       '<b>'+esc(t("t_when"))+':</b> '+esc(t("t_when_v"))+'<br>'+
       '<b>'+esc(t("t_where"))+':</b> '+esc(t("t_where_v"))+'<br>'+
-      '<b>'+esc(t("t_name"))+':</b> '+esc(guest.name)+' · '+esc(guest.email);
+      '<b>'+esc(t("t_name"))+':</b> '+esc(guest.name)+' · '+esc(guest.email)+
+      (inviter ? '<br><b>'+esc(t("t_inv"))+':</b> '+esc(inviter) : '');
 
     var cta = $("#done-cta"); cta.innerHTML="";
     if(url){
