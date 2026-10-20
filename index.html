@@ -725,7 +725,7 @@ a.btn{display:block;text-align:center;text-decoration:none}
       nameEntry:  "entry.1537169254",  // pregunta "Name"
       emailEntry: "entry.886656657",   // pregunta "Email"
       phoneEntry: "entry.49740755",    // pregunta "Phone"
-      inviterEntry: ""                 // pregunta "Invited by" (pendiente: falta el código entry.XXXX)
+      inviterEntry: "entry.1811443473" // pregunta "Invited by"
     },
     calendarUrl: "",  // link "Agregar al calendario" (opcional)
     // Personajes que salen en la pestaña Matches. Fotos: hasta 5 por personaje, en la carpeta chars/.
@@ -1013,7 +1013,7 @@ a.btn{display:block;text-align:center;text-decoration:none}
     if(f.nameEntry)  p.append(f.nameEntry, guest.name);
     if(f.emailEntry) p.append(f.emailEntry, guest.email);
     if(f.phoneEntry) p.append(f.phoneEntry, guest.phone);
-    if(f.inviterEntry) p.append(f.inviterEntry, inviter);
+    if(f.inviterEntry) p.append(f.inviterEntry, inviter || "Link general");
     return p;
   }
   /* Pre-filled form link — only shown if the background send fails. */
