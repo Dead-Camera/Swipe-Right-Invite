@@ -127,9 +127,9 @@ button{font-family:inherit}
 /* ---------- SPLASH ---------- */
 #splash{align-items:center;text-align:center;padding:0 30px;gap:0;overflow-y:auto;overflow-x:hidden}
 #splash .sp-hero{flex:0 0 auto;min-height:100%;width:100%;display:flex;flex-direction:column;align-items:center}
-#splash .sp-more{margin-top:14px;font-size:22px;line-height:1;color:var(--dim);animation:bob 1.8s ease-in-out infinite}
+#splash .sp-more{margin:16px auto 0;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;color:var(--fg);background:var(--surface-2);border:1px solid var(--line);animation:bob 1.8s ease-in-out infinite}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
-#splash .sp-poster{flex:0 0 auto;display:block;width:100%;height:auto;border-radius:20px;margin:6px 0 30px;box-shadow:0 24px 60px -24px rgba(0,0,0,.85)}
+#splash .sp-poster{flex:0 0 auto;display:block;width:calc(100% + 60px);max-width:none;height:auto;margin:0 -30px}
 #splash .apphead{align-self:stretch}
 #splash .big{font-size:62px}
 #splash h1{
@@ -499,7 +499,7 @@ a.btn{display:block;text-align:center;text-decoration:none}
     <div class="foot" style="padding:0 30px 30px">
       <button class="btn" id="go-create" data-t="w_btn"></button>
       <div class="studio" style="margin-top:22px"><span class="lbl" data-t="studio"></span><img src="deadcamera.png" alt="Dead Camera Studios"></div>
-      <div class="sp-more" aria-hidden="true">⌄</div>
+      <div class="sp-more" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v15M5.5 12.5L12 19l6.5-6.5"/></svg></div>
     </div>
    </div>
     <img class="sp-poster" id="sp-poster" alt="SWIPE RIGHT">
