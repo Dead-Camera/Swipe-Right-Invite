@@ -62,8 +62,8 @@ input:focus{border-color:#ff5864}
   var name = document.getElementById("name"), out = document.getElementById("url");
   var copy = document.getElementById("copy"), wa = document.getElementById("wa"), lang = "es";
   var MSG = {
-    es: function(n, u){ return "¡Hola! Te invito a la premiere de SWIPE RIGHT, la primera serie vertical proyectada en una sala de cine 🎬💘\nSábado 5 de diciembre · 4:30 p. m. · Cinemark El Tesoro, Medellín.\nConfirma aquí: " + u; },
-    en: function(n, u){ return "Hi! You're invited to the SWIPE RIGHT premiere, the first-ever vertical series screened in a movie theater 🎬💘\nSaturday, December 5 · 4:30 PM · Cinemark, El Tesoro Mall, Medellín.\nRSVP here: " + u; }
+    es: function(n, u){ return "¡Hola! Te invito a la premiere de SWIPE RIGHT, la primera serie vertical proyectada en una sala de cine.\nSábado 5 de diciembre · 4:30 p. m. · Cinemark El Tesoro, Medellín.\nConfirma aquí: " + u; },
+    en: function(n, u){ return "Hi! You're invited to the SWIPE RIGHT premiere, the first-ever vertical series screened in a movie theater!\nSaturday, December 5 · 4:30 PM · Cinemark, El Tesoro Mall, Medellín.\nRSVP here: " + u; }
   };
   function link(){ var n = name.value.replace(/\s+/g," ").trim(); return n ? base + "?de=" + encodeURIComponent(n) : ""; }
   function update(){
