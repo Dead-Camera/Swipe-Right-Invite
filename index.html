@@ -445,6 +445,15 @@ a.btn{display:block;text-align:center;text-decoration:none}
 .phone *{scrollbar-width:none}
 .phone *::-webkit-scrollbar{display:none}
 
+/* photo arrows (SWIPE RIGHT card + character profiles) */
+.parrow{position:absolute;top:22%;z-index:5;width:36px;height:36px;border-radius:50%;border:0;cursor:pointer;
+  background:rgba(10,12,20,.45);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);color:#fff;
+  font:400 26px/1 "Poppins",sans-serif;display:grid;place-items:center;padding:0 0 3px;transition:background var(--d-fast)}
+.parrow:hover{background:rgba(10,12,20,.7)}
+.parrow.l{left:10px}.parrow.r{right:10px}
+.vphotos .parrow{top:50%;transform:translateY(-50%)}
+.vphotos .parrow[hidden]{display:none}
+
 /* ---------- language switch ---------- */
 .lang{position:absolute;top:18px;right:16px;z-index:40;display:flex;padding:3px;border:0;border-radius:999px;cursor:pointer;
   background:rgba(10,12,20,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 0 0 1px rgba(255,255,255,.1) inset}
@@ -535,6 +544,8 @@ a.btn{display:block;text-align:center;text-decoration:none}
         <div class="stamp like" id="stamp-like">Match</div>
         <div class="stamp nope" id="stamp-nope">Nope</div>
         <div class="photos" id="photos"></div>
+        <button class="parrow l" data-arrow="-1" aria-label="Previous photo">‹</button>
+        <button class="parrow r" data-arrow="1" aria-label="Next photo">›</button>
         <div class="tapzone l" data-tap="-1"></div>
         <div class="tapzone r" data-tap="1"></div>
         <div class="info">
@@ -582,6 +593,8 @@ a.btn{display:block;text-align:center;text-decoration:none}
         <div class="vphotos" id="vphotos">
           <div class="vbars" id="vbars"></div>
           <div class="vtap l" data-v="-1"></div><div class="vtap r" data-v="1"></div>
+          <button class="parrow l" data-varrow="-1" aria-label="Previous photo">‹</button>
+          <button class="parrow r" data-varrow="1" aria-label="Next photo">›</button>
         </div>
         <div class="vinfo">
           <div class="vn" id="vname"></div>
@@ -694,12 +707,13 @@ a.btn{display:block;text-align:center;text-decoration:none}
       { id: "mike", name: "Mike", age: 24, grad: "linear-gradient(150deg,#2a6b5a,#1a2226)",
         photos: ["chars/mike-1.jpg"] }
     ],
-    // Key art del perfil. Para usar una imagen: { img: "archivo.jpg" }
+    // Fotos del perfil de SWIPE RIGHT (la primera es la principal). Para cambiar una: { img: "sr/archivo.jpg" }
     photos: [
-      { grad: "linear-gradient(145deg,#ff5864,#fd267a)" },
-      { grad: "linear-gradient(145deg,#ff9a3d,#ff5864)" },
-      { grad: "linear-gradient(160deg,#7b2ff7,#fd267a)" },
-      { grad: "linear-gradient(150deg,#141925,#ff5864)" }
+      { img: "sr/sr-1.jpg" },
+      { img: "sr/sr-2.jpg" },
+      { img: "sr/sr-3.jpg" },
+      { img: "sr/sr-4.jpg" },
+      { img: "sr/sr-5.jpg" }
     ]
   };
 
@@ -1030,7 +1044,7 @@ a.btn{display:block;text-align:center;text-decoration:none}
       var el = document.createElement("div");
       el.className = "photo" + (i===0 ? " show" : "");
       el.innerHTML = ph.img
-        ? '<div class="art"><img src="'+ph.img+'" alt="" style="width:100%;height:100%;object-fit:cover"></div><div class="scrim"></div>'
+        ? '<div class="art"><img src="'+ph.img+'" alt="" style="width:100%;height:100%;object-fit:cover;object-position:50% 25%"></div><div class="scrim"></div>'
         : '<div class="art" style="background:'+ph.grad+'"></div><div class="ka"><img class="srlogo" src="sr-logo-white.png" alt="SWIPE RIGHT"></div><div class="scrim"></div>';
       photos.appendChild(el);
       var bar = document.createElement("i"); if(i===0) bar.className="on"; bars.appendChild(bar);
@@ -1054,6 +1068,7 @@ a.btn{display:block;text-align:center;text-decoration:none}
   var dragging=false, startX=0, startY=0, dx=0, dy=0, moved=false, pid=null;
   var THRESH = 110;
   function onDown(e){
+    if(e.target.closest(".parrow")) return;
     if(accepted) return;
     dragging=true; moved=false;
     startX = e.clientX; startY = e.clientY; dx=0; dy=0; pid = e.pointerId;
@@ -1091,6 +1106,9 @@ a.btn{display:block;text-align:center;text-decoration:none}
     card.style.transform = "translate("+(dir*w)+"px,-40px) rotate("+(dir*22)+"deg)";
     card.style.opacity = 0;
   }
+  $$("#card .parrow").forEach(function(b){
+    b.addEventListener("click", function(e){ e.stopPropagation(); setPhoto(photoIndex + parseInt(b.getAttribute("data-arrow"),10)); });
+  });
   card.addEventListener("pointerdown", onDown);
   card.addEventListener("pointermove", onMove);
   card.addEventListener("pointerup", onUp);
@@ -1193,6 +1211,7 @@ a.btn{display:block;text-align:center;text-decoration:none}
       ph.insertBefore(sl, ph.firstChild);
     });
     $(".vhint").style.visibility = list.length > 1 ? "visible" : "hidden";
+    $$("#vphotos .parrow").forEach(function(b){ b.hidden = list.length < 2; });
     $("#vbars").innerHTML = list.length > 1 ? list.map(function(_, i){ return '<i'+(i===vIdx?' class="on"':'')+'></i>'; }).join("") : "";
     $("#vname").innerHTML = '<b>'+esc(vChar.name)+'</b>, '+vChar.age;
     $("#vloc").textContent = d.loc;
@@ -1206,6 +1225,10 @@ a.btn{display:block;text-align:center;text-decoration:none}
     slides.forEach(function(n, i){ n.classList.toggle("show", i===vIdx); });
     $$("#vbars i").forEach(function(b, i){ b.classList.toggle("on", i===vIdx); });
   }
+  $$("#vphotos .parrow").forEach(function(b){
+    b.addEventListener("pointerdown", function(e){ e.stopPropagation(); });
+    b.addEventListener("click", function(){ vGo(parseInt(b.getAttribute("data-varrow"),10)); });
+  });
   $("#vclose").addEventListener("click", function(){ $("#viewer").classList.remove("on"); vChar = null; });
   (function(){
     var ph = $("#vphotos"), sx = null, sy = 0;
